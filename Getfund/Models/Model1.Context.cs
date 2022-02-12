@@ -13,10 +13,10 @@ namespace Getfund.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Test1Entities1 : DbContext
+    public partial class Test1Entities : DbContext
     {
-        public Test1Entities1()
-            : base("name=Test1Entities1")
+        public Test1Entities()
+            : base("name=Test1Entities")
         {
         }
     

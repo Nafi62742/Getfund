@@ -9,7 +9,7 @@ namespace Getfund.Controllers
 {
     public class HomeController : Controller
     {
-        Test1Entities1 db = new Test1Entities1();
+        Test1Entities db = new Test1Entities();
         public ActionResult Index()
         {
             return View();
@@ -42,6 +42,18 @@ namespace Getfund.Controllers
         {
             List<GUser> Users = db.GUsers.ToList();
             return View(Users);
+        }
+
+        public ActionResult Profile()
+        {
+            //List<GUser> Users = db.GUsers.ToList();
+            return View();
+        }
+
+        public ActionResult Details()
+        {
+            //List<GUser> Users = db.GUsers.ToList();
+            return View();
         }
         public ActionResult Register()
         {
