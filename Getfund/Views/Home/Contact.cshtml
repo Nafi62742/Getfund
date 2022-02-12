@@ -1,0 +1,28 @@
+﻿@model List<Getfund.Models.GUser>
+@{
+    ViewBag.Title = "Contact";
+}
+ 
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Pass</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.ID</th>
+            <th>@item.Name</th>
+            <th>@item.Email</th>
+            <th>@item.Password</th>
+        </tr>
+    }
+
+</table>
+
+<address>
+    <strong>emaillink:</strong>   <a href="mailto:Support@example.com">email@example.com</a><br />
+  
+</address>
