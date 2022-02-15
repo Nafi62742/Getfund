@@ -13,10 +13,10 @@ namespace Getfund.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Test1Entities : DbContext
+    public partial class GetFundEntities : DbContext
     {
-        public Test1Entities()
-            : base("name=Test1Entities")
+        public GetFundEntities()
+            : base("name=GetFundEntities")
         {
         }
     
@@ -25,6 +25,10 @@ namespace Getfund.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Donation> Donations { get; set; }
         public virtual DbSet<GUser> GUsers { get; set; }
+        public virtual DbSet<Project> Projects { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<Profile> Profiles { get; set; }
     }
 }

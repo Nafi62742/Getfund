@@ -14,10 +14,27 @@ namespace Getfund.Models
     
     public partial class GUser
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public GUser()
+        {
+            this.Donations = new HashSet<Donation>();
+            this.Comments = new HashSet<Comment>();
+            this.Profiles = new HashSet<Profile>();
+            this.Projects = new HashSet<Project>();
+        }
+    
         public int ID { get; set; }
-        public string Name { get; set; }
-        public string Address { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public Nullable<bool> IsValid { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Donation> Donations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Profile> Profiles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Project> Projects { get; set; }
     }
 }

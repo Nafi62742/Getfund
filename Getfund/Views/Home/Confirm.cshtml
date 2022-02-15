@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Confirm";
+}
+
+<div class="alert alert-danger" role="alert" id="previous">
+    <strong>Authenticate your Email</strong>
+    <input type="submit" class="btn btn-warning" value="Confirm" onclick="Varified()"/>
+</div>
+<div class="alert alert-success" role="alert" id="after" style="display:none">
+    <strong><span class="glyphicon glyphicon-ok"></span>Your Email is verified</strong>
+    <a href="/Home/LoginPage">Go to login</a>
+</div>
+<script>
+    function Varified() {
+        $.ajax({
+            type: "post",
+            url: "/Home/RegistrationConfirm",
+            data: { 'regId': '@ViewBag.regID' },
+            success: function (msg) {
+                $("#previous").hide();
+                $("#after").show();
+                alert(msg);
+            }
+        })
+    }
+</script>
+
