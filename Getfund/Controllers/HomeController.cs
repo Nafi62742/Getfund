@@ -14,6 +14,9 @@ namespace Getfund.Controllers
     public class HomeController : Controller
     {
         GetFundEntities db = new GetFundEntities();
+        public static int idUser;
+        public static String userEmail;
+        public static String userName;
         public ActionResult Index()
         {
             return View();
@@ -34,12 +37,28 @@ namespace Getfund.Controllers
         }
         public ActionResult Search(string email, string LoginPass)
         {
-            
+
             List<GUser> Users = db.GUsers.Where(temp => temp.Email.Equals(email) && temp.Password.Equals(LoginPass)).ToList();
+            
             if (Users.Count > 0)
             {
-                ViewBag.Message = "Login Successful";
-                return View(Users);
+                
+                var pro = (from g in db.GUsers
+                           join p in db.Profiles on g.ID equals p.ID
+                           where g.Email == email
+                           select new ProfileShow
+                           {
+                               ID = g.ID,
+                               Name = p.Name,
+                               Address = p.Address,
+                               Email = g.Email,
+                               NID = p.NID,
+                           }).SingleOrDefault();
+                idUser=pro.ID;
+                ViewBag.Message = pro.Name;
+                
+                List<Project> projects = db.Projects.ToList();
+                return View(projects);
             }
             else
             {
@@ -57,6 +76,28 @@ namespace Getfund.Controllers
 
         public ActionResult Profile()
         {
+            var pro = (from g in db.GUsers
+                       join p in db.Profiles on g.ID equals p.ID
+                       where g.ID == idUser
+                       select new ProfileShow
+                       {
+                           Name = p.Name,
+                           Address = p.Address,
+                           Email = g.Email,
+                           NID = p.NID,
+                       }).SingleOrDefault();
+            if(pro == null)
+            {
+                return RedirectToAction("LoginPage");
+            }
+            else
+            {
+            return View(pro);
+            }
+            
+        }
+        public ActionResult Project()
+        {
             //List<GUser> Users = db.GUsers.ToList();
             return View();
         }
@@ -73,11 +114,21 @@ namespace Getfund.Controllers
         [HttpPost]
         public ActionResult Register(GUser user)
         {
-           
-            db.GUsers.Add(user);
-            db.SaveChanges();
-             BuildEmailTemplate(user.ID);
-            return RedirectToAction("LoginPage");
+
+            List<GUser> Users = db.GUsers.Where(temp => temp.Email.Equals(user.Email)).ToList();
+
+            if (Users.Count <1)
+            {
+                db.GUsers.Add(user);
+                db.SaveChanges();
+                BuildEmailTemplate(user.ID);
+                return RedirectToAction("LoginPage");
+            }
+            else
+            {
+                return RedirectToAction("LoginPage");
+            }
+
         }
         public ActionResult Confirm(int regId)
         {

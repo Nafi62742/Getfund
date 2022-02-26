@@ -160,6 +160,7 @@
     <Compile Include="Models\Profile.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProfileShow.cs" />
     <Compile Include="Models\Project.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -172,12 +173,16 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\MyMainLayOut.css" />
     <Content Include="Content\details.css" />
+    <Content Include="Content\login.css" />
+    <Content Include="images\b1.png" />
     <Content Include="images\f1.jpg" />
     <Content Include="images\f2.jpg" />
     <Content Include="images\f3.gif" />
     <Content Include="images\img.png" />
+    <Content Include="images\logo.png" />
     <Content Include="images\m1.jpg" />
     <Content Include="images\m2.jpg" />
+    <Content Include="images\person.png" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -188,6 +193,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\app.js" />
     <Content Include="Scripts\script.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -239,6 +245,7 @@
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\LoginPage.cshtml" />
     <Content Include="Views\Home\Confirm.cshtml" />
+    <Content Include="Views\Home\Project.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

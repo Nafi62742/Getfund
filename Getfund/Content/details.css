@@ -314,6 +314,56 @@ img {
             border-color: transparent;
             color: #fff;
         }
+
+
+
+.progress{
+    height:10px;
+}
+
+.progress-bar{
+    background-color:green;
+    height:20px;
+   
+}
+
+.Comments-head {
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 40px;
+    color: black;
+    margin-top: 10px;
+}
+
+
+.Comments-wrapper {
+    width: fit-content;
+    background: #ededed;
+    border-radius:10px;
+    padding:10px;
+    margin:10px;
+}
+
+.comments-icon{
+    
+    font-weight: 400;
+    color:black;
+    
+}
+
+.Commenter-name {
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 10px;
+    color: grey;
+}
+
+.Comments{
+    font-size:10px;
+    color:black;
+}
+
+
 @media screen and (min-width: 992px) {
     .card {
         display: grid;
