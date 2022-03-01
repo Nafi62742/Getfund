@@ -1,69 +1,8 @@
-<<<<<<< HEAD
-﻿@model List<Getfund.Models.Project>
-=======
 ﻿@model Getfund.Models.Project
->>>>>>> 8bf4967bdd5b9e1bef8395bc4305d8036c8f1feb
 
 @{
     ViewBag.Title = "Project";
 }
 
-<<<<<<< HEAD
-<div class="container2">
-    <div class="row justify-content-center">
-        @foreach (var item in Model)
-        {
-            <div class="col-lg-4 col-md-4">
-
-
-                <div class="card shadow" style="width: 100%;">
-                    <div class="inner">
-                        <img src="@item.VideoLink" class="card-img-top" alt="...">
-                    </div>
-                    <div class="card-body text-center">
-                        <h5 class="card-title">@item.Title</h5>
-                        <p class="card-text">@item.Info.</p>
-                        <form action="/Home/Details" autocomplete="off" class="sign-up-form">
-                            <input type="hidden"
-                                   name="BoxID"
-                                   id="BoxID"
-                                   minlength="4"
-                                   value="@item.PId"
-                                   required />
-                            <input type="submit" value="Learn More" class="sign-btn" />
-                            <!--<a href="/Home/Details" class="btn btn-outline-success">Learn More</a>-->
-                        </form>
-                    </div>
-                </div>
-            </div>
-        }
-        <!--<div class="col-lg-4 col-md-4">
-            <div class="card shadow" style="width: 100%;">
-                <div class="inner">
-                    <img src="~/images/p2.jpg" class="card-img-top" alt="...">
-                </div>
-                <div class="card-body text-center">
-                    <h5 class="card-title">Easy Flight Search</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="/Home/Details" class="btn btn-outline-success">Learn More</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-4">
-            <div class="card shadow" style="width: 100%;">
-                <div class="inner">
-                    <img src="~/images/p3.jpg" class="card-img-top" alt="...">
-                </div>
-                <div class="card-body text-center">
-                    <h5 class="card-title">Easy Flight Search</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="/Home/Details" class="btn btn-outline-success">Learn More</a>
-                </div>
-            </div>
-        </div>-->
-    </div>
-</div>
-=======
 <h2>Project</h2>
 
->>>>>>> 8bf4967bdd5b9e1bef8395bc4305d8036c8f1feb

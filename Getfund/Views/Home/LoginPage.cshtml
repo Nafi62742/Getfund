@@ -12,47 +12,6 @@
             <div class="box">
                 <div class="inner-box">
                     <div class="forms-wrap">
-<<<<<<< HEAD
-                        <form action="/Home/Search" autocomplete="on" class="sign-in-form">
-
-                            <div class="heading">
-                                <h2>Welcome Back</h2>
-                                <h6>Not registred yet?</h6>
-                                <a href="/Home/Register">Sign up</a>
-                            </div>
-
-                            <div class="actual-form">
-                                <div class="input-wrap">
-                                    <input type="email"
-                                           minlength="4"
-                                           class="input-field"
-                                           name="Email"
-                                           id="Email"
-                                           autocomplete="off"
-                                           required />
-                                    <label>Email</label>
-                                </div>
-
-                                <div class="input-wrap">
-                                    <input type="password"
-                                           minlength="4"
-                                           class="input-field"
-                                           name="LoginPass"
-                                           id="LoginPass"
-                                           autocomplete="off"
-                                           required />
-                                    <label>Password</label>
-
-                                </div>
-
-                                @if (TempData["LoginError"] != null)
-                                {
-                                    <p style="color:red">@TempData["LoginError"]</p>
-                                }
-                                <p style="color:red">@ViewBag.Message</p>
-                                <input type="submit" value="Sign In" class="sign-btn" />
-
-=======
                         <form action="/Home/Search" autocomplete="off" class="sign-in-form">
                           
                             <div class="heading">
@@ -86,7 +45,6 @@
 
                                 <input type="submit" value="Sign In" class="sign-btn" />
 
->>>>>>> 8bf4967bdd5b9e1bef8395bc4305d8036c8f1feb
                                 <p class="text">
                                     Forgotten your password or you login datails?
                                     <a href="#">Get help</a> signing in
@@ -94,52 +52,6 @@
                             </div>
                         </form>
 
-<<<<<<< HEAD
-                        <!-- <form action="/Home/LoginPage" autocomplete="on" class="sign-up-form">
-
-
-         <div class="heading">
-             <h2>Get Started</h2>
-             <h6>Already have an account?</h6>
-             <a href="#" class="toggle">Sign in</a>
-         </div>
-
-         <div class="actual-form">
-
-             <div class="input-wrap">
-                 <input type="email"
-                        name="Email"
-                        id="Email"
-                        class="input-field"
-                        autocomplete="off"
-                        required />
-                 <label>Email</label>
-             </div>
-
-             <div class="input-wrap">
-                 <input type="password"
-                        name="Password"
-                        id="Password"
-                        minlength="4"
-                        class="input-field"
-                        autocomplete="off"
-                        required />
-                 <label>Password</label>
-             </div>
-             @if (TempData["LoginError"] != null)
-             {
-                 <p style="color:red">@TempData["LoginError"]</p>
-             }
-             <input type="submit" value="Sign Up" class="sign-btn" />
-
-             <p class="text">
-                 By signing up, I agree to the
-                 <a href="#">Terms of Services</a> and
-                 <a href="#">Privacy Policy</a>
-             </p>
-         </div>
-     </form>-->
-=======
                         <form action="/Home/Register" autocomplete="off" class="sign-up-form">
                            
 
@@ -181,7 +93,6 @@
                                 </p>
                             </div>
                         </form>
->>>>>>> 8bf4967bdd5b9e1bef8395bc4305d8036c8f1feb
                     </div>
 
                     <div class="carousel">

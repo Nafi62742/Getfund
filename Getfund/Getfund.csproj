@@ -164,10 +164,6 @@
     <Compile Include="Models\Project.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ShowDetails.cs" />
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -209,7 +205,6 @@
     <Content Include="images\user2.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="EmailTemplate\GetFundMail.cshtml" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -217,6 +212,7 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="EmailTemplate\GetFundMail.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -250,10 +246,6 @@
     <Content Include="Views\Home\LoginPage.cshtml" />
     <Content Include="Views\Home\Confirm.cshtml" />
     <Content Include="Views\Home\Project.cshtml" />
-<<<<<<< HEAD
-    <Content Include="Views\Home\Logout.cshtml" />
-=======
->>>>>>> 8bf4967bdd5b9e1bef8395bc4305d8036c8f1feb
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

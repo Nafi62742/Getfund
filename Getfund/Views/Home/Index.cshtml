@@ -1,4 +1,4 @@
-﻿@model List<Getfund.Models.Project>
+﻿@model List<Getfund.Models.GUser>
 
 @{
     ViewBag.Title = "Home Page";
@@ -101,29 +101,6 @@
 
     <div class="container2">
         <div class="row justify-content-center">
-<<<<<<< HEAD
-            @foreach (var item in Model)
-            {
-                <div class="col-lg-4 col-md-4">
-                    <div class="card shadow" style="width: 100%;">
-                        <div class="inner">
-                            <img src="~/images/p1.jpg" class="card-img-top" alt="...">
-                        </div>
-                        <div class="card-body text-center">
-                            <h5 class="card-title">@item.Title</h5>
-                            <p class="card-text">@item.Info.</p>
-                            <form action="/Home/Details" autocomplete="off" class="sign-up-form">
-                                <input type="hidden"
-                                       name="BoxID"
-                                       id="BoxID"
-                                       minlength="4"
-                                       value="@item.PId"
-                                       required />
-                                <input type="submit" value="Learn More" class="sign-btn" />
-                                <!--<a href="/Home/Details" class="btn btn-outline-success">Learn More</a>-->
-                            </form>
-                        </div>
-=======
             <div class="col-lg-4 col-md-4">
                 <div class="card shadow" style="width: 100%;">
                     <div class="inner">
@@ -157,35 +134,9 @@
                         <h5 class="card-title">Easy Flight Search</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         <a href="/Home/Details" class="btn btn-outline-success">Learn More</a>
->>>>>>> 8bf4967bdd5b9e1bef8395bc4305d8036c8f1feb
                     </div>
                 </div>
-            }
-            <!--<div class="col-lg-4 col-md-4">
-        <div class="card shadow" style="width: 100%;">
-            <div class="inner">
-                <img src="~/images/p2.jpg" class="card-img-top" alt="...">
             </div>
-            <div class="card-body text-center">
-                <h5 class="card-title">Easy Flight Search</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="/Home/Details" class="btn btn-outline-success">Learn More</a>
-            </div>
-        </div>
-    </div>
-<<<<<<< HEAD
-    <div class="col-lg-4 col-md-4">
-        <div class="card shadow" style="width: 100%;">
-            <div class="inner">
-                <img src="~/images/p3.jpg" class="card-img-top" alt="...">
-            </div>
-            <div class="card-body text-center">
-                <h5 class="card-title">Easy Flight Search</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="/Home/Details" class="btn btn-outline-success">Learn More</a>
-            </div>
-        </div>
-    </div>-->
         </div>
     </div>
 
@@ -200,20 +151,6 @@
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
 
-=======
-
-    <div class="container2">
-        <div class="card mb-3" style="max-width: 100%;">
-            <div class="row g-0">
-                <div class="col-md-6">
-                    <img class="img-fluid rounded-start" style="height:350px;width:100%" src="~/images/p3.jpg">
-                </div>
-                <div class="col-md-6">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-
->>>>>>> 8bf4967bdd5b9e1bef8395bc4305d8036c8f1feb
                     </div>
                 </div>
             </div>
