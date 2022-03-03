@@ -1,0 +1,101 @@
+﻿@model Getfund.Models.ProfileShow
+@{
+    ViewBag.Title = "Post";
+}
+
+
+
+<head>
+
+    <link rel="stylesheet" href="~/Content/post.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+<body>
+
+
+    <main>
+        <div class="box">
+            <div class="inner-box">
+               
+
+                    <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+
+                        <h3 class="mb-4">Create a Post</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Project Name</label>
+                                    <input type="text" class="form-control" value="Model.Name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Location</label>
+                                    <input type="text" class="form-control" value="Model.Email">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Donations from</label>
+                                    <input type="text" class="form-control" value="+880179845697">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Fund Raise Goal</label>
+                                    <input type="number" class="form-control" value="Model.Address">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <input type="text" class="form-control" value="Software developer">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Details</label>
+                                    <textarea class="form-control" rows="4">Description about the user will be here.</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="wrapper">
+                                        <header>Project Pictures</header>
+                                        <form action="#">
+                                            <input class="file-input" type="file" name="file" hidden>
+                                            <i class="fas fa-cloud-upload-alt"></i>
+                                            <p>Browse Images to Upload</p>
+                                        </form>
+                                        <section class="progress-area"></section>
+                                        <section class="uploaded-area"></section>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary">Update</button>
+                            <button class="btn btn-light">Cancel</button>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        
+    </main>
+
+    <script src="~/Scripts/post.js"></script>
+
+</body>
+

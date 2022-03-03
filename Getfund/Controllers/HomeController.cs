@@ -31,7 +31,15 @@ namespace Getfund.Controllers
 
             return View();
         }
-        
+
+        public ActionResult Post()
+        {
+
+            ViewBag.Message = "";
+            return View();
+        }
+
+
         public ActionResult Search(string email, string LoginPass)
         {
 
