@@ -324,6 +324,7 @@ namespace Getfund.Controllers
                            Address = p.Address,
                            NID = p.NID,
                            Title = pj.Title,
+                           VideoLink=pj.VideoLink,
                           Info=pj.Info,
                           Type=pj.Type,
                           Target=pj.Target,

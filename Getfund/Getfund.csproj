@@ -139,7 +139,6 @@
     <Compile Include="Models\Donation.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\FileUploadModel.cs" />
     <Compile Include="Models\GUser.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
