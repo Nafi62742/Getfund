@@ -1,0 +1,57 @@
+﻿@model List<Getfund.Models.Project>
+@{
+    ViewBag.Title = "ProjectList";
+}
+<head>
+
+    <link rel="stylesheet" href="~/Content/post.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+<body>
+    <main>
+        <div class="box">
+            <div class="inner-box">
+                <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+                    <h3 class="mb-4">Donating to project</h3>
+                </div>
+                <div>
+                    <form action="/Home/Post">
+                        <button class="btn btn-primary">Add new Posts</button>
+                    </form>
+                </div>
+                @foreach (var item in Model)
+                {
+                    <div class="col-lg-4 col-md-4">
+
+
+                        <div class="card shadow" style="width: 100%;">
+                            <div class="inner">
+                                <img src="@item.VideoLink" class="card-img-top" alt="...">
+                            </div>
+                            <div class="card-body text-center">
+                                <h5 class="card-title">@item.Title</h5>
+                                <p class="card-text">@item.Info.</p>
+                                <form action="/Home/Details" autocomplete="off" class="sign-up-form">
+                                    <input type="hidden"
+                                           name="BoxID"
+                                           id="BoxID"
+                                           minlength="4"
+                                           value="@item.PId"
+                                           required />
+                                    <input type="submit" value="Learn More" class="sign-btn" />
+                                    <!--<a href="/Home/Details" class="btn btn-outline-success">Learn More</a>-->
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+
+    </main>
+
+    <script src="~/Scripts/post.js"></script>
+
+</body>

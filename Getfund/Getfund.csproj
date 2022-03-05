@@ -139,6 +139,7 @@
     <Compile Include="Models\Donation.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FileUploadModel.cs" />
     <Compile Include="Models\GUser.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -254,9 +255,13 @@
     <Content Include="Views\Home\Project.cshtml" />
     <Content Include="Views\Home\Logout.cshtml" />
     <Content Include="Views\Home\Post.cshtml" />
+    <Content Include="Views\Home\Donate.cshtml" />
+    <Content Include="Views\Home\ProjectList.cshtml" />
+    <Content Include="Views\Home\PostProject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UploadFiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

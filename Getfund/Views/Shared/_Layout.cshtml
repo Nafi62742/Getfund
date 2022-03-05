@@ -60,19 +60,18 @@
                             @if (Session["UsernameSS"] != null)
                             {
                                 <li><a href="/Home">Home</a></li>
-                                <li><a href="/Home/project">Projects</a></li>
-                                <li><a href="/Home/Profile">Profile</a></li>
-                                <li><p style="color:#a16640;margin-top:15px;"> @Session["UsernameSS"] </p></li>
+                                <li><a href="/Home/project">Project feed</a></li>
+                                <li><a href="/Home/Profile">@Session["UsernameSS"]</a></li>
+                                <li><a href="/Home/ProjectList">Own Project</a></li>
+                                <li><a href="/Home/Post" class="btn">Create a Post</a></li>
                                 <li><a href="/Home/Logout" class="btn">Log out</a></li>
                             }
                             else
                             {
                                 <li><a href="/Home">Home</a></li>
                                 <li><a href="/Home/project">Projects</a></li>
-                                <li><a href="/Home/Profile">Profile</a></li>
+                                <li><a href="/Home/LoginPage" class="btn">Create a Post</a></li>
                                 <li><a href="/Home/LoginPage" class="btn">Sign up</a></li>
-                                
-
                             }
 
 

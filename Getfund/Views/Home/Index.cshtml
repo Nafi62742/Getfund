@@ -10,26 +10,6 @@
 </head>
 
 
-<!---<div class="container5">
-    <div class="card-banner mb-3" style="max-width: 100%;">
-        <div class="row g-0">
-
-            <div class="col-md-6">
-                <div class="card-body2">
-                    <p class="card-tt">Trusted fundraising for all of life's moments</p>
-                    <p class="card-txt">Get help. Give kindness. Start in just 5 minutes.</p>
-                    <button type="button" class="btn">Start GettingFund</button>
-
-                </div>
-            </div>
-            <div class="b-pic col-md-6">
-                <img class="img-fluid rounded-start" style="max-height:500px;width:100%" src="~/images/b1.png">
-            </div>
-        </div>
-    </div>
-</div>
-    -->
-
 <div class="showcase-area">
     <div class="container">
         <div class="left">
@@ -43,7 +23,15 @@
                 Get help. Give kindness. Start in just 5 minutes.
             </p>
             <div class="cta">
-                <a href="#" class="btn">Get started</a>
+                @if (Session["UsernameSS"] != null)
+                {
+                    <a href="/Home/Post" class="btn">Get started</a>
+                }
+                else
+                {
+                    <a href="/Home/LoginPage" class="btn">Get started</a>
+                }
+
             </div>
         </div>
 
@@ -55,46 +43,6 @@
 
 <div class="container">
 
-    <!--<div id="themeSlider" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#themeSlider" data-slide-to="0" class="active"></li>
-            <li data-target="#themeSlider" data-slide-to="1"></li>
-            <li data-target="#themeSlider" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="item active">
-                <div class="imgOverlay"></div>
-                <img style="height:350px;width:100%" src="~/images/m1.jpg" alt="First slide">
-                <div class="carousel-caption">
-                    <h3>New</h3>
-
-                </div>
-            </div>
-            <div class="item">
-                <div class="imgOverlay"></div>
-                <img style="height:350px;width:100%" src="~/images/m2.jpg" alt="Second slide">
-                <div class="carousel-caption">
-                    <h3>My Phone</h3>
-
-                </div>
-            </div>
-            <div class="item">
-                <div class="imgOverlay"></div>
-                <img style="height:350px;width:100%" src="~/images/p3.jpg" alt="Third slide">
-                <div class="carousel-caption">
-                    <h3>Latest</h3>
-
-                </div>
-            </div>
-        </div>
-        <a class="left carousel-control" href="#themeSlider" data-slide="prev">
-            <span class="fa fa-chevron-left"></span>
-        </a>
-        <a class="right carousel-control" href="#themeSlider" data-slide="next">
-            <span class="fa fa-chevron-right"></span>
-        </a>
-
-    </div>-->
     <div class="olContent f1"><h2 style="color:green"><b>Top Fundraisers</b></h2></div>
 
 
@@ -106,7 +54,7 @@
                 <div class="col-lg-4 col-md-4">
                     <div class="card shadow" style="width: 100%;">
                         <div class="inner">
-                            <img src="~/images/p1.jpg" class="card-img-top" alt="...">
+                            <img src="@item.VideoLink" class="card-img-top" alt="...">
                         </div>
                         <div class="card-body text-center">
                             <h5 class="card-title">@item.Title</h5>
@@ -119,7 +67,6 @@
                                        value="@item.PId"
                                        required />
                                 <input type="submit" value="Learn More" class="sign-btn" />
-                                <!--<a href="/Home/Details" class="btn btn-outline-success">Learn More</a>-->
                             </form>
                         </div>
                     </div>

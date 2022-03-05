@@ -7,6 +7,7 @@ namespace Getfund.Models
 {
     public class ShowDetails
     {
+        public int PId { get; set; }
         public Nullable<int> ID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }

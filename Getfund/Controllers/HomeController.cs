@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
@@ -20,8 +21,18 @@ namespace Getfund.Controllers
         public static bool emailexists=false;
         public ActionResult Index()
         {
-            List<Project> projects = db.Projects.ToList();
-            return View(projects);
+            if (Session["IdUsSS"] != null)
+            {
+                return RedirectToAction("Search");
+            }
+            else
+            {
+                List<Project> projects = db.Projects.ToList();
+                return View(projects);
+                
+
+            }
+            
               
         }
 
@@ -31,14 +42,117 @@ namespace Getfund.Controllers
 
             return View();
         }
+        public ActionResult ProjectList()
+        {
+            if (Session["IdUsSS"] != null)
+            {
+                List<Project> proj = db.Projects.Where(x=>x.ID==idUser).ToList();
+                var pro = (from g in db.GUsers
+                           join p in db.Profiles on g.ID equals p.ID
+                           where g.Email == userEmail
+                           select new ProfileShow
+                           {
+                               ID = g.ID,
+                               Name = p.Name,
+                               Address = p.Address,
+                               Email = g.Email,
+                               NID = p.NID,
+                           }).SingleOrDefault();
+                
+                return View(proj);
+            }
+            else
+            {
+                return RedirectToAction("LoginPage");
 
+            }
+
+        }
         public ActionResult Post()
+        {
+            if (Session["IdUsSS"] != null)
+            {
+                var pro = (from g in db.GUsers
+                           join p in db.Profiles on g.ID equals p.ID
+                           where g.Email == userEmail
+                           select new ProfileShow
+                           {
+                               ID = g.ID,
+                               Name = p.Name,
+                               Address = p.Address,
+                               Email = g.Email,
+                               NID = p.NID,
+                           }).SingleOrDefault();
+                ViewBag.Message = pro.Name;
+                return View(pro);
+            }
+            else
+            {
+                return RedirectToAction("LoginPage");
+
+            }
+            
+        }
+        
+        [HttpPost]
+        public ActionResult UploadFiles(HttpPostedFileBase file)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (file != null)
+                    {
+                        string path = Path.Combine(Server.MapPath("~/UploadFiles"), Path.GetFileName(file.FileName));
+                        ViewBag.FilePath = path;
+                        ViewBag.FileStatus = "/UploadFiles/" + Path.GetFileName(file.FileName);
+            
+                        file.SaveAs(path); 
+                    }
+                    
+                    
+                }
+                catch (Exception)
+                {
+
+                    ViewBag.FileStatus = "Error while file uploading.";
+                }
+
+            }
+            return View("Post");
+        }
+        [HttpGet]
+        public ActionResult PostProject()
         {
 
             ViewBag.Message = "";
             return View();
         }
+        [HttpPost]
+        public ActionResult PostProject(Project UpProj)
+        {
+            List<Project> Users = db.Projects.Where(temp => temp.Title.Equals(UpProj.Title)).ToList();
 
+            if (Users.Count < 1)
+            {
+                db.Projects.Add(UpProj);
+                db.SaveChanges();
+                return RedirectToAction("Search");
+            }
+            else
+            {
+                TempData["SameProj"] = "Project available with the same name!";
+                return RedirectToAction("Post");
+
+            }
+        
+        }
+        public ActionResult Donate()
+        {
+
+            ViewBag.Message = "";
+            return View();
+        }
 
         public ActionResult Search(string email, string LoginPass)
         {
@@ -66,7 +180,7 @@ namespace Getfund.Controllers
 
                 if (Users.Count > 0)
                 {
-
+                    
                     var pro = (from g in db.GUsers
                                join p in db.Profiles on g.ID equals p.ID
                                where g.Email == email
@@ -77,6 +191,8 @@ namespace Getfund.Controllers
                                    Address = p.Address,
                                    Email = g.Email,
                                    NID = p.NID,
+                                   
+
                                }).SingleOrDefault();
                     idUser = pro.ID;
                     userEmail = pro.Email;
@@ -84,7 +200,8 @@ namespace Getfund.Controllers
                     Session["IdUsSS"] = pro.ID.ToString();
                     Session["UsernameSS"] = pro.Name.ToString();
                     Session["UserEmail"] = pro.Email.ToString();
-
+                    Session["UserAddress"] = pro.Address.ToString();
+                    Session["UserEmail"] = pro.Email.ToString();
                     List<Project> projects = db.Projects.ToList();
                     return View(projects);
                 }
@@ -124,6 +241,7 @@ namespace Getfund.Controllers
         }
         public ActionResult Logout()
         {
+            idUser=0;
             Session["IdUsSS"] = null;
             Session["UsernameSS"] = null;
             Session["UserEmail"] = null;
