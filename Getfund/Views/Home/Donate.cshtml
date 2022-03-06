@@ -13,61 +13,74 @@
             <div class="inner-box">
                 <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
 
-                    <h3 class="mb-4">Donating to project</h3>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Project Name</label>
-                                <input type="text" class="form-control" value="Model.Name">
+                    <form action="/Home/Donate" autocomplete="on" class="sign-in-form" method="post">
+                        <h3 class="mb-4">@ViewBag.Message</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Project Name</label>
+                                    <input type="text" class="form-control" placeholder="Project name">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Project Name</label>
+                                    <input type="datetime" class="form-control" placeholder="Time">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Donation Amount</label>
-                                <input type="number" class="form-control" value="0" min="0">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Donation Amount</label>
+                                    <input type="number" class="form-control" min="0" placeholder="The amount">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Transaction ID</label>
+                                    <input type="text" class="form-control" placeholder="Transaction ID only">
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Transaction ID</label>
-                                <input type="text" class="form-control" value="Payment Way">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Donations from</label>
+                                    <input type="text" class="form-control" value="@Session["UsernameSS"]">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Project Owner</label>
+                                    <input type="text" class="form-control" value="Project Owner">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Donations from</label>
-                                <input type="text" class="form-control" value="Owner Name">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Project Name</label>
+                                    <textarea class="form-control" rows="1">Description about the project will be here.</textarea>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Project Owner</label>
-                                <input type="text" class="form-control" value="Project Owner">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Project Name</label>
-                                <textarea class="form-control" rows="1">Description about the project will be here.</textarea>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <button class="btn btn-primary">Update</button>
-                        <button class="btn btn-light">Cancel</button>
-                    </div>
-                </div>
 
+                        <div>
+                            <input type="submit" value="Upload Data" class="btn" />
+                        </div>
+                    </form>
+                    <!--File Upload All Data Post End-->
+                    <div>
+                        <form action="/Home/Search" autocomplete="on" class="sign-in-form">
+                            <input type="submit" value="Cancel" class="btn" />
+                        </form>
+
+                    </div>
+
+                </div>
             </div>
         </div>
-
     </main>
 
     <script src="~/Scripts/post.js"></script>

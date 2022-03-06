@@ -150,8 +150,27 @@ namespace Getfund.Controllers
         public ActionResult Donate()
         {
 
-            ViewBag.Message = "";
+            ViewBag.Message = "Donating to project";
             return View();
+        }
+        [HttpPost]
+        public ActionResult Donate(Donation donation)
+        {
+            ViewBag.Message = "Donating to project";
+            List<GUser> Users = db.GUsers.Where(temp => temp.Email.Equals(donation.PId)).ToList();
+
+                if (Users.Count < 1)
+                {
+                    db.Donations.Add(donation);
+                    db.SaveChanges();
+                    return RedirectToAction("LoginPage");
+                }
+                else
+                {
+                    TempData["LoginError"] = "Check password or username!";
+                    return RedirectToAction("Register");
+
+                }
         }
 
         public ActionResult Search(string email, string LoginPass)
@@ -219,24 +238,33 @@ namespace Getfund.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Register(GUser user)
+        public ActionResult Register(GUser user , String ConfirmPassword)
         {
-
-            List<GUser> Users = db.GUsers.Where(temp => temp.Email.Equals(user.Email)).ToList();
-
-            if (Users.Count < 1)
+            if (user.Password.Equals(ConfirmPassword))
             {
-                db.GUsers.Add(user);
-                db.SaveChanges();
-                BuildEmailTemplate(user.ID);
-                return RedirectToAction("LoginPage");
+                List<GUser> Users = db.GUsers.Where(temp => temp.Email.Equals(user.Email)).ToList();
+
+                if (Users.Count < 1)
+                {
+                    db.GUsers.Add(user);
+                    db.SaveChanges();
+                    BuildEmailTemplate(user.ID);
+                    return RedirectToAction("LoginPage");
+                }
+                else
+                {
+                    TempData["LoginError"] = "Check password or username!";
+                    return RedirectToAction("Register");
+
+                }
             }
             else
             {
-                TempData["LoginError"] = "Check password or username!";
+                TempData["LoginError"] = "Password Doesn't match!";
                 return RedirectToAction("Register");
 
             }
+
 
         }
         public ActionResult Logout()
@@ -388,7 +416,6 @@ namespace Getfund.Controllers
             mail.IsBodyHtml = true;
             SendMail(mail);
         }
-
         private void SendMail(MailMessage mail)
         {
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587);

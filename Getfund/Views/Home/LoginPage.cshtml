@@ -2,18 +2,15 @@
 @{
     ViewBag.Title = "LoginPage";
 }
-<h2>@ViewBag.message</h2>
 <head>
     <link rel="stylesheet" href="~/Content/login.css" />
 </head>
-
     <body>
         <main>
             <div class="box">
                 <div class="inner-box">
                     <div class="forms-wrap">
                         <form action="/Home/Search"  class="sign-in-form">
-
                             <div class="heading">
                                 <h2>Welcome Back</h2>
                                 <h6>Not registred yet?</h6>
@@ -23,7 +20,7 @@
                             <div class="actual-form">
                                 <div class="input-wrap">
                                     <input type="email"
-                                           minlength="4"
+                                           minlength="11"
                                            class="input-field"
                                            name="Email"
                                            id="Email"
@@ -34,8 +31,8 @@
 
                                 <div class="input-wrap">
                                     <input type="password"
-                                           minlength="4"
                                            class="input-field"
+                                           minlength="6"
                                            name="LoginPass"
                                            id="LoginPass"
                                            autocomplete="off"
@@ -43,7 +40,6 @@
                                     <label>Password</label>
 
                                 </div>
-
                                 @if (TempData["LoginError"] != null)
                                 {
                                     <p style="color:red">@TempData["LoginError"]</p>

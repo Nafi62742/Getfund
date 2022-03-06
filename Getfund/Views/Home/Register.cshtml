@@ -2,8 +2,6 @@
 @{
     ViewBag.Title = "Register";
 }
-
-<h2>@ViewBag.message</h2>
 <head>
     <link rel="stylesheet" href="~/Content/login.css" />
 </head>
@@ -14,8 +12,6 @@
             <div class="inner-box">
                 <div class="forms-wrap">
                     <form action="/Home/Register" autocomplete="on" class="sign-in-form" method="post">
-
-
                         <div class="heading">
                             <h2>Get Started</h2>
                             <h6>Already have an account?</h6>
@@ -25,43 +21,54 @@
                         <div class="actual-form">
 
                             <div class="input-wrap">
+                                <input type="text"
+                                       name="RegName"
+                                       id="RegName"
+                                       class="input-field"
+                                       required />
+                                <label>Name</label>
+                            </div>
+                            <div class="input-wrap">
                                 <input type="email"
                                        name="Email"
                                        id="Email"
+                                       minlength="6"
                                        class="input-field"
-                                       autocomplete="off"
                                        required />
                                 <label>Email</label>
                             </div>
-
-                            <div class="input-wrap">
-                                <input type="hidden"
-                                       name="IsValid"
-                                       id="IsValid"
-                                       value="0"
-                                       minlength="4"
-                                       class="input-field"
-                                       autocomplete="off"
-                                       required />
-                            </div>
-
                             <div class="input-wrap">
                                 <input type="password"
                                        name="Password"
                                        id="Password"
-                                       minlength="4"
+                                       minlength="6"
                                        class="input-field"
-                                       autocomplete="off"
                                        required />
                                 <label>Password</label>
-
+                            </div>
+                                <div class="input-wrap">
+                                    <input type="password"
+                                           name="ConfirmPassword"
+                                           id="ConfirmPassword"
+                                           minlength="6"
+                                           class="input-field"
+                                           autocomplete="off"
+                                           required />
+                                    <label>Confirm Password</label>
+                                </div>
+                               
+                                    <input type="hidden"
+                                           name="IsValid"
+                                           id="IsValid"
+                                           value="0"
+                                           required />
                             </div>
                             @if (TempData["LoginError"] != null)
                             {
                                 <p style="color:red">@TempData["LoginError"]</p>
                             }
                             <input type="submit" value="Sign Up" class="sign-btn" />
-                            }
+                            
                             <p class="text">
                                 By signing up, I agree to the
                                 <a href="#">Terms of Services</a> and
