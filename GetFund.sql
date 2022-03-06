@@ -23,6 +23,9 @@ Address varchar(50) default 'Dhaka',
 NID int  NULL
 );
 
+INSERT INTO Profile(ID,Name,Address,NID)
+VALUES (3,'Swap','Dhaka',15479684);
+
 create table Project
 (
 PId int IDENTITY(1,1) PRIMARY KEY,

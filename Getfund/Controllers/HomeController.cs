@@ -199,7 +199,7 @@ namespace Getfund.Controllers
 
                 if (Users.Count > 0)
                 {
-                    
+
                     var pro = (from g in db.GUsers
                                join p in db.Profiles on g.ID equals p.ID
                                where g.Email == email
@@ -210,19 +210,29 @@ namespace Getfund.Controllers
                                    Address = p.Address,
                                    Email = g.Email,
                                    NID = p.NID,
-                                   
+
 
                                }).SingleOrDefault();
-                    idUser = pro.ID;
-                    userEmail = pro.Email;
-                    ViewBag.Message = pro.Name;
-                    Session["IdUsSS"] = pro.ID.ToString();
-                    Session["UsernameSS"] = pro.Name.ToString();
-                    Session["UserEmail"] = pro.Email.ToString();
-                    Session["UserAddress"] = pro.Address.ToString();
-                    Session["UserEmail"] = pro.Email.ToString();
-                    List<Project> projects = db.Projects.ToList();
-                    return View(projects);
+
+                    if (pro != null)
+                    {
+                        idUser = pro.ID;
+                        userEmail = pro.Email;
+                        ViewBag.Message = pro.Name;
+                        Session["IdUsSS"] = pro.ID.ToString();
+                        Session["UsernameSS"] = pro.Name.ToString();
+                        Session["UserEmail"] = pro.Email.ToString();
+                        Session["UserAddress"] = pro.Address.ToString();
+                        Session["UserEmail"] = pro.Email.ToString();
+                        List<Project> projects = db.Projects.ToList();
+
+                        return View(projects);
+                    }
+                    else
+                    {
+                        TempData["LoginError"] = "Null Pacchi";
+                        return RedirectToAction("LoginPage");
+                    }
                 }
                 else
                 {
@@ -357,6 +367,7 @@ namespace Getfund.Controllers
                           Type=pj.Type,
                           Target=pj.Target,
                           MoneyRaised=pj.MoneyRaised,
+                          MoneyRaisedP = (pj.MoneyRaised+1),
                        }).SingleOrDefault();
             return View(Detail);
         }

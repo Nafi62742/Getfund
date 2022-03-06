@@ -72,10 +72,11 @@
             <h2 class="product-title">@Model.Title</h2>
 
             <div class="heart-btn">
-                <div class="content">
+                <div class="content" onclick="returnView">
                     <span class="heart"></span>
                     <span class="text">❤️ Like</span>
-                    <span class="numb"></span>
+                    <span class="numb" style="--number-n : @Model.MoneyRaised; --number-n2 : @Model.MoneyRaisedP"></span>
+                    
                 </div>
             </div>
             <div class="product-price">

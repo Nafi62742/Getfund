@@ -18,5 +18,6 @@ namespace Getfund.Models
         public string Type { get; set; }
         public string Target { get; set; }
         public Nullable<double> MoneyRaised { get; set; }
+        public Nullable<double> MoneyRaisedP { get; set; }
     }
 }

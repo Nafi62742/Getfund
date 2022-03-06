@@ -4,21 +4,18 @@
 }
 <head>
 
-    <link rel="stylesheet" href="~/Content/post.css">
+    <link rel="stylesheet" href="~/Content/project.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 <body>
-    <main>
-        <div class="box">
-            <div class="inner-box">
-                <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
-                    <h3 class="mb-4">Donating to project</h3>
-                </div>
-                <div>
-                    <form action="/Home/Post">
-                        <button class="btn btn-primary">Add new Posts</button>
-                    </form>
-                </div>
+    <div class="container">
+        <div class="container2">
+            <div class="row justify-content-center">
+                <!-- <div>
+                <form action="/Home/Post">
+                    <button class="btn btn-primary">Add new Posts</button>
+                </form>
+                    </div>-->
                 @foreach (var item in Model)
                 {
                     <div class="col-lg-4 col-md-4">
@@ -48,7 +45,7 @@
             </div>
         </div>
 
-    </main>
+    </div>
 
     <script src="~/Scripts/post.js"></script>
 

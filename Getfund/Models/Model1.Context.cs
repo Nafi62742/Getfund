@@ -10,7 +10,6 @@
 namespace Getfund.Models
 {
     using System;
-    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
@@ -29,9 +28,7 @@ namespace Getfund.Models
         public virtual DbSet<Donation> Donations { get; set; }
         public virtual DbSet<GUser> GUsers { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Profile> Profiles { get; set; }
-        public IEnumerable<object> Project { get; internal set; }
     }
 }

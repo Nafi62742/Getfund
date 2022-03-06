@@ -19,6 +19,8 @@ function slideImage() {
 window.addEventListener('resize', slideImage);
 
 
+
+
     $(document).ready(function(){
         $('.content').click(function () {
             $('.content').toggleClass("heart-active")
