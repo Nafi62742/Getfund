@@ -43,6 +43,7 @@
             </p>
             <div class="cta">
                 <a href="#" class="btn">
+                    @Session["ProjectId"]
                     @ViewBag.Message Get started
                 </a>
             </div>
@@ -120,7 +121,7 @@
                                            name="BoxID"
                                            id="BoxID"
                                            minlength="4"
-                                           value="@item.ID"
+                                           value="@item.PId"
                                            required />
                                     <input type="submit" value="Learn More" class="sign-btn" />
                                     <!--<a href="/Home/Details" class="btn btn-outline-success">Learn More</a>-->

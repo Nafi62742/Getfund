@@ -8,6 +8,9 @@ namespace Getfund.Models
 {
     public class ProfileShow
     {
+
+        public string ProfilePicture { get; set; }
+        public int ProfileId { get; set; }
         public int ID { get; set; }
         public string Email { get; set; }
         public string Name { get; set; }

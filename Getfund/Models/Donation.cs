@@ -18,9 +18,9 @@ namespace Getfund.Models
         public Nullable<int> ID { get; set; }
         public Nullable<int> PId { get; set; }
         public string DonateDes { get; set; }
-        public System.DateTime DonateTime { get; set; }
-        public int transaction_id { get; set; }
-        public double Amount { get; set; }
+        public string DonateTime { get; set; }
+        public string transaction_id { get; set; }
+        public int Amount { get; set; }
     
         public virtual GUser GUser { get; set; }
         public virtual Project Project { get; set; }

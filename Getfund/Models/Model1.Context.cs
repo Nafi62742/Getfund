@@ -25,10 +25,11 @@ namespace Getfund.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Donation> Donations { get; set; }
         public virtual DbSet<GUser> GUsers { get; set; }
-        public virtual DbSet<Project> Projects { get; set; }
-        public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Profile> Profiles { get; set; }
+        public virtual DbSet<Project> Projects { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

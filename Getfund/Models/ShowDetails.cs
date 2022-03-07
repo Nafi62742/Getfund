@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace Getfund.Models
 {
     public class ShowDetails
     {
+        public int ProfileId { get; set; }
+        
         public int PId { get; set; }
         public Nullable<int> ID { get; set; }
         public string Name { get; set; }

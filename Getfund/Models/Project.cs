@@ -17,8 +17,8 @@ namespace Getfund.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Project()
         {
-            this.Donations = new HashSet<Donation>();
             this.Comments = new HashSet<Comment>();
+            this.Donations = new HashSet<Donation>();
         }
     
         public int PId { get; set; }
@@ -29,11 +29,13 @@ namespace Getfund.Models
         public string Type { get; set; }
         public string Target { get; set; }
         public Nullable<double> MoneyRaised { get; set; }
+        public string ProjectImage1 { get; set; }
+        public Nullable<int> Likes { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Donation> Donations { get; set; }
         public virtual GUser GUser { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

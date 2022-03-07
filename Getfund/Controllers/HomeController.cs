@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
@@ -18,6 +19,7 @@ namespace Getfund.Controllers
         public static int idUser;
         public static String userEmail;
         public static String userName;
+       
         public static bool emailexists=false;
         public ActionResult Index()
         {
@@ -52,6 +54,8 @@ namespace Getfund.Controllers
                            where g.Email == userEmail
                            select new ProfileShow
                            {
+                               ProfilePicture = p.ProfilePicture,
+                               ProfileId = p.ProfileId,
                                ID = g.ID,
                                Name = p.Name,
                                Address = p.Address,
@@ -77,6 +81,8 @@ namespace Getfund.Controllers
                            where g.Email == userEmail
                            select new ProfileShow
                            {
+                               ProfilePicture = p.ProfilePicture,
+                               ProfileId = p.ProfileId,
                                ID = g.ID,
                                Name = p.Name,
                                Address = p.Address,
@@ -104,9 +110,8 @@ namespace Getfund.Controllers
                     if (file != null)
                     {
                         string path = Path.Combine(Server.MapPath("~/UploadFiles"), Path.GetFileName(file.FileName));
-                        ViewBag.FilePath = path;
+                        ViewBag.FilePath = "Pic loaded click post to save.";
                         ViewBag.FileStatus = "/UploadFiles/" + Path.GetFileName(file.FileName);
-            
                         file.SaveAs(path); 
                     }
                     
@@ -121,10 +126,30 @@ namespace Getfund.Controllers
             }
             return View("Post");
         }
+        public ActionResult UploadProfilePic(HttpPostedFileBase file)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (file != null)
+                    {
+                        string path = Path.Combine(Server.MapPath("~/UploadProfilePic"), Path.GetFileName(file.FileName));
+                        ViewBag.ProfilePicDone = "Profile pic loaded click post to save.";
+                        ViewBag.FileStatus = "/UploadProfilePic/" + Path.GetFileName(file.FileName);
+                        file.SaveAs(path);
+                    }
+                }
+                catch (Exception)
+                {
+                    ViewBag.FileStatus = "Error while file uploading.";
+                }
+            }
+            return View("Profile");
+        }
         [HttpGet]
         public ActionResult PostProject()
         {
-
             ViewBag.Message = "";
             return View();
         }
@@ -137,6 +162,7 @@ namespace Getfund.Controllers
             {
                 db.Projects.Add(UpProj);
                 db.SaveChanges();
+                
                 return RedirectToAction("Search");
             }
             else
@@ -147,31 +173,61 @@ namespace Getfund.Controllers
             }
         
         }
+      
+        public ActionResult DonationPage(int ProjectId, int DonatedMoney)
+        {
+            var Detail = (from pj in db.Projects
+                          join p in db.Profiles on pj.ID equals p.ID
+                          where pj.PId == ProjectId
+                          select new ShowDetails
+                          {
+                              ProfileId = p.ProfileId,
+                              ID = p.ID,
+                              PId =pj.PId,
+                              Name = p.Name,
+                              Address = p.Address,
+                              NID = p.NID,
+                              Title = pj.Title,
+                              VideoLink = pj.VideoLink,
+                              Info = pj.Info,
+                              Type = pj.Type,
+                              Target = pj.Target,
+                              MoneyRaised = pj.MoneyRaised,
+                          }).SingleOrDefault();
+            DateTime now = DateTime.Now;
+            TempData["Donationdate"] = now.ToString();
+            TempData["Idcheck"] = Detail.ID;
+            TempData["Idcheck"] = Detail.PId;
+            TempData["DonatedMoney"] = Convert.ToInt32( DonatedMoney) ;
+            ViewBag.Message = "Donating to project";
+            return View(Detail);
+        }
         public ActionResult Donate()
         {
 
-            ViewBag.Message = "Donating to project";
-            return View();
+            return View();    
         }
         [HttpPost]
         public ActionResult Donate(Donation donation)
         {
-            ViewBag.Message = "Donating to project";
-            List<GUser> Users = db.GUsers.Where(temp => temp.Email.Equals(donation.PId)).ToList();
+            
+            db.Donations.Add(donation);
+                db.SaveChanges();
+                return RedirectToAction("Search");
+            
+                TempData["SameProj"] = "Project available with the same name!";
+         
 
-                if (Users.Count < 1)
-                {
-                    db.Donations.Add(donation);
-                    db.SaveChanges();
-                    return RedirectToAction("LoginPage");
-                }
-                else
-                {
-                    TempData["LoginError"] = "Check password or username!";
-                    return RedirectToAction("Register");
-
-                }
         }
+        public ActionResult DonationHistory(int IdForDonation)
+        {
+            List<Donation> donations = db.Donations.Where(temp => temp.ID==IdForDonation).ToList();
+           
+            return View(donations);
+
+
+        }
+
 
         public ActionResult Search(string email, string LoginPass)
         {
@@ -183,6 +239,8 @@ namespace Getfund.Controllers
                            where g.Email == userEmail
                            select new ProfileShow
                            {
+                               ProfilePicture = p.ProfilePicture,
+                               ProfileId = p.ProfileId,
                                ID = g.ID,
                                Name = p.Name,
                                Address = p.Address,
@@ -205,12 +263,13 @@ namespace Getfund.Controllers
                                where g.Email == email
                                select new ProfileShow
                                {
+                                   ProfilePicture = p.ProfilePicture,
+                                   ProfileId = p.ProfileId,
                                    ID = g.ID,
                                    Name = p.Name,
                                    Address = p.Address,
                                    Email = g.Email,
                                    NID = p.NID,
-
 
                                }).SingleOrDefault();
 
@@ -230,7 +289,7 @@ namespace Getfund.Controllers
                     }
                     else
                     {
-                        TempData["LoginError"] = "Null Pacchi";
+                        TempData["LoginError"] = "Null Value";
                         return RedirectToAction("LoginPage");
                     }
                 }
@@ -259,6 +318,10 @@ namespace Getfund.Controllers
                     db.GUsers.Add(user);
                     db.SaveChanges();
                     BuildEmailTemplate(user.ID);
+                    List<GUser> UsersCheck = db.GUsers.Where(temp => temp.Email.Equals(user.Email)).ToList();
+                    if(UsersCheck.Count > 0) { 
+                        
+                    }
                     return RedirectToAction("LoginPage");
                 }
                 else
@@ -328,7 +391,9 @@ namespace Getfund.Controllers
                        where g.ID == idUser
                        select new ProfileShow
                        {
-                           ID=g.ID,
+                           ProfilePicture = p.ProfilePicture,
+                           ProfileId = p.ProfileId,
+                           ID = g.ID,
                            Name = p.Name,
                            Address = p.Address,
                            Email = g.Email,
@@ -344,6 +409,101 @@ namespace Getfund.Controllers
             }
             
         }
+
+
+        [HttpPost]
+        public ActionResult Profile(GUser user, String ConfirmPassword, String OldPassword, String CPassword, Profile profile)
+        {
+            if (ConfirmPassword != null)
+            {
+                if (user.Password.Equals(ConfirmPassword))
+                {
+                    
+                    db.Entry(user).State = EntityState.Modified;
+                    db.SaveChanges();
+                    
+                    
+
+                    var pro = (from g in db.GUsers
+                               join p in db.Profiles on g.ID equals p.ID
+                               where g.ID == idUser
+                               select new ProfileShow
+                               {
+                                   ProfilePicture = p.ProfilePicture,
+                                   ProfileId = p.ProfileId,
+                                   ID = g.ID,
+                                   Name = p.Name,
+                                   Address = p.Address,
+                                   Email = g.Email,
+                                   NID = p.NID,
+                               }).SingleOrDefault();
+                    if (pro == null)
+                    {
+                        return RedirectToAction("LoginPage");
+                    }
+                    else
+                    {
+                        return View(pro);
+                    }
+                }
+                else
+                {
+                    var pro = (from g in db.GUsers
+                               join p in db.Profiles on g.ID equals p.ID
+                               where g.ID == idUser
+                               select new ProfileShow
+                               {   
+                                   ProfilePicture=p.ProfilePicture,
+                                   ProfileId = p.ProfileId,
+                                   ID = g.ID,
+                                   Name = p.Name,
+                                   Address = p.Address,
+                                   Email = g.Email,
+                                   NID = p.NID,
+                               }).SingleOrDefault();
+                    if (pro == null)
+                    {
+                        return RedirectToAction("LoginPage");
+                    }
+                    else
+                    {
+                        return View(pro);
+                    }
+                }
+            }
+            else
+            {
+                    db.Entry(profile).State = EntityState.Modified;
+                    db.SaveChanges();
+               
+                    var pro = (from g in db.GUsers
+                               join p in db.Profiles on g.ID equals p.ID
+                               where g.ID == idUser
+                               select new ProfileShow
+                               {
+                                   ProfilePicture = p.ProfilePicture,
+                                   ProfileId = p.ProfileId,
+                                   ID = g.ID,
+                                   Name = p.Name,
+                                   Address = p.Address,
+                                   Email = g.Email,
+                                   NID = p.NID,
+                               }).SingleOrDefault();
+                    if (pro == null)
+                    {
+                        return RedirectToAction("LoginPage");
+                    }
+                    else
+                    {
+                        return View(pro);
+                    }
+
+                
+                
+
+            }
+
+        }
         public ActionResult Project()
         {
             List<Project> projects = db.Projects.ToList();
@@ -352,24 +512,47 @@ namespace Getfund.Controllers
 
         public ActionResult Details(int BoxID)
         {
-            var Detail = (from pj in db.Projects
-                       join p in db.Profiles on pj.ID equals p.ID
-                       where pj.PId == BoxID
-                       select new ShowDetails
-                       {
-                           ID = p.ID,
-                           Name = p.Name,
-                           Address = p.Address,
-                           NID = p.NID,
-                           Title = pj.Title,
-                           VideoLink=pj.VideoLink,
-                          Info=pj.Info,
-                          Type=pj.Type,
-                          Target=pj.Target,
-                          MoneyRaised=pj.MoneyRaised,
-                          MoneyRaisedP = (pj.MoneyRaised+1),
-                       }).SingleOrDefault();
-            return View(Detail);
+            if (Session["IdUsSS"] != null)
+            {
+                var Detail = (from pj in db.Projects
+                              join p in db.Profiles on pj.ID equals p.ID
+                              where pj.PId == BoxID
+                              select new ShowDetails
+                              {
+                                  PId = pj.PId,
+                                  ID = p.ID,
+                                  Name = p.Name,
+                                  Address = p.Address,
+                                  NID = p.NID,
+                                  Title = pj.Title,
+                                  VideoLink = pj.VideoLink,
+                                  Info = pj.Info,
+                                  Type = pj.Type,
+                                  Target = pj.Target,
+                                  MoneyRaised = pj.MoneyRaised,
+                                  MoneyRaisedP = (pj.MoneyRaised + 1),
+                              }).SingleOrDefault();
+                
+                TempData["PId"] = Detail.PId;
+                TempData["ID"] = Detail.ID;
+                TempData["Name"] = Detail.Name;
+                TempData["Address"] = Detail.Address;
+                TempData["NID"] = Detail.NID;
+                TempData["VideoLink"] = Detail.VideoLink;
+                TempData["Title"]=Detail.Title;
+                TempData["Info"] = Detail.Info;
+                TempData["Type"] = Detail.Type;
+                TempData["Target"] = Detail.Target;
+                TempData["MoneyRaised"] = Detail.MoneyRaised;
+                TempData["MoneyRaisedP"] = Detail.MoneyRaisedP;
+
+                List<Comment> comments = db.Comments.ToList();
+                return View(comments);
+            }
+            else
+            {
+                return RedirectToAction("LoginPage");
+            }
         }
         
         public ActionResult Confirm(int regId)
