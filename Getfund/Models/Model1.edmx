@@ -10,7 +10,7 @@
             <PropertyRef Name="CommentId" />
           </Key>
           <Property Name="CommentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ID" Type="int" />
+          <Property Name="CName" Type="varchar" MaxLength="50" />
           <Property Name="PId" Type="int" />
           <Property Name="Comment" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -42,9 +42,9 @@
           <Property Name="ProfileId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID" Type="int" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProfilePicture" Type="varchar" MaxLength="255" />
           <Property Name="Address" Type="varchar" MaxLength="50" />
           <Property Name="NID" Type="int" />
-          <Property Name="ProfilePicture" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Project">
           <Key>
@@ -52,14 +52,14 @@
           </Key>
           <Property Name="PId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID" Type="int" />
-          <Property Name="Title" Type="varchar" MaxLength="50" />
-          <Property Name="Info" Type="varchar" MaxLength="50" />
-          <Property Name="VideoLink" Type="varchar" MaxLength="250" />
-          <Property Name="Type" Type="varchar" MaxLength="50" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Info" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="VideoLink" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Target" Type="varchar" MaxLength="50" />
-          <Property Name="MoneyRaised" Type="float" />
           <Property Name="ProjectImage1" Type="varchar" MaxLength="255" />
           <Property Name="Likes" Type="int" />
+          <Property Name="MoneyRaised" Type="float" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -71,19 +71,7 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <Association Name="FK__Comments__ID__29221CFB">
-          <End Role="GUser" Type="Self.GUser" Multiplicity="0..1" />
-          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GUser">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Comments">
-              <PropertyRef Name="ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Comments__PId__2A164134">
+        <Association Name="FK__Comments__PId__4222D4EF">
           <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
           <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
           <ReferentialConstraint>
@@ -95,7 +83,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Donation__ID__30C33EC3">
+        <Association Name="FK__Donation__ID__44FF419A">
           <End Role="GUser" Type="Self.GUser" Multiplicity="0..1" />
           <End Role="Donation" Type="Self.Donation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -107,7 +95,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Donation__PId__31B762FC">
+        <Association Name="FK__Donation__PId__45F365D3">
           <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
           <End Role="Donation" Type="Self.Donation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -119,7 +107,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Profile__ID__160F4887">
+        <Association Name="FK__Profile__ID__3A81B327">
           <End Role="GUser" Type="Self.GUser" Multiplicity="0..1" />
           <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
           <ReferentialConstraint>
@@ -131,7 +119,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Project__ID__02FC7413">
+        <Association Name="FK__Project__ID__3E52440B">
           <End Role="GUser" Type="Self.GUser" Multiplicity="0..1" />
           <End Role="Project" Type="Self.Project" Multiplicity="*" />
           <ReferentialConstraint>
@@ -150,27 +138,23 @@
           <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Comments__ID__29221CFB" Association="Self.FK__Comments__ID__29221CFB">
-            <End Role="GUser" EntitySet="GUser" />
-            <End Role="Comments" EntitySet="Comments" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Comments__PId__2A164134" Association="Self.FK__Comments__PId__2A164134">
+          <AssociationSet Name="FK__Comments__PId__4222D4EF" Association="Self.FK__Comments__PId__4222D4EF">
             <End Role="Project" EntitySet="Project" />
             <End Role="Comments" EntitySet="Comments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Donation__ID__30C33EC3" Association="Self.FK__Donation__ID__30C33EC3">
+          <AssociationSet Name="FK__Donation__ID__44FF419A" Association="Self.FK__Donation__ID__44FF419A">
             <End Role="GUser" EntitySet="GUser" />
             <End Role="Donation" EntitySet="Donation" />
           </AssociationSet>
-          <AssociationSet Name="FK__Donation__PId__31B762FC" Association="Self.FK__Donation__PId__31B762FC">
+          <AssociationSet Name="FK__Donation__PId__45F365D3" Association="Self.FK__Donation__PId__45F365D3">
             <End Role="Project" EntitySet="Project" />
             <End Role="Donation" EntitySet="Donation" />
           </AssociationSet>
-          <AssociationSet Name="FK__Profile__ID__160F4887" Association="Self.FK__Profile__ID__160F4887">
+          <AssociationSet Name="FK__Profile__ID__3A81B327" Association="Self.FK__Profile__ID__3A81B327">
             <End Role="GUser" EntitySet="GUser" />
             <End Role="Profile" EntitySet="Profile" />
           </AssociationSet>
-          <AssociationSet Name="FK__Project__ID__02FC7413" Association="Self.FK__Project__ID__02FC7413">
+          <AssociationSet Name="FK__Project__ID__3E52440B" Association="Self.FK__Project__ID__3E52440B">
             <End Role="GUser" EntitySet="GUser" />
             <End Role="Project" EntitySet="Project" />
           </AssociationSet>
@@ -185,11 +169,10 @@
             <PropertyRef Name="CommentId" />
           </Key>
           <Property Name="CommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ID" Type="Int32" />
+          <Property Name="CName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PId" Type="Int32" />
           <Property Name="Comment1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="GUser" Relationship="Self.FK__Comments__ID__29221CFB" FromRole="Comments" ToRole="GUser" />
-          <NavigationProperty Name="Project" Relationship="Self.FK__Comments__PId__2A164134" FromRole="Comments" ToRole="Project" />
+          <NavigationProperty Name="Project" Relationship="Self.FK__Comments__PId__4222D4EF" FromRole="Comments" ToRole="Project" />
         </EntityType>
         <EntityType Name="Donation">
           <Key>
@@ -202,8 +185,8 @@
           <Property Name="DonateTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="transaction_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Amount" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="GUser" Relationship="Self.FK__Donation__ID__30C33EC3" FromRole="Donation" ToRole="GUser" />
-          <NavigationProperty Name="Project" Relationship="Self.FK__Donation__PId__31B762FC" FromRole="Donation" ToRole="Project" />
+          <NavigationProperty Name="GUser" Relationship="Self.FK__Donation__ID__44FF419A" FromRole="Donation" ToRole="GUser" />
+          <NavigationProperty Name="Project" Relationship="Self.FK__Donation__PId__45F365D3" FromRole="Donation" ToRole="Project" />
         </EntityType>
         <EntityType Name="GUser">
           <Key>
@@ -213,10 +196,9 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IsValid" Type="Boolean" />
-          <NavigationProperty Name="Comments" Relationship="Self.FK__Comments__ID__29221CFB" FromRole="GUser" ToRole="Comments" />
-          <NavigationProperty Name="Donations" Relationship="Self.FK__Donation__ID__30C33EC3" FromRole="GUser" ToRole="Donation" />
-          <NavigationProperty Name="Profiles" Relationship="Self.FK__Profile__ID__160F4887" FromRole="GUser" ToRole="Profile" />
-          <NavigationProperty Name="Projects" Relationship="Self.FK__Project__ID__02FC7413" FromRole="GUser" ToRole="Project" />
+          <NavigationProperty Name="Donations" Relationship="Self.FK__Donation__ID__44FF419A" FromRole="GUser" ToRole="Donation" />
+          <NavigationProperty Name="Profiles" Relationship="Self.FK__Profile__ID__3A81B327" FromRole="GUser" ToRole="Profile" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK__Project__ID__3E52440B" FromRole="GUser" ToRole="Project" />
         </EntityType>
         <EntityType Name="Profile">
           <Key>
@@ -225,10 +207,10 @@
           <Property Name="ProfileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID" Type="Int32" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProfilePicture" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="NID" Type="Int32" />
-          <Property Name="ProfilePicture" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="GUser" Relationship="Self.FK__Profile__ID__160F4887" FromRole="Profile" ToRole="GUser" />
+          <NavigationProperty Name="GUser" Relationship="Self.FK__Profile__ID__3A81B327" FromRole="Profile" ToRole="GUser" />
         </EntityType>
         <EntityType Name="Project">
           <Key>
@@ -236,17 +218,17 @@
           </Key>
           <Property Name="PId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID" Type="Int32" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Info" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="VideoLink" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Info" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VideoLink" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Target" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MoneyRaised" Type="Double" />
           <Property Name="ProjectImage1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Likes" Type="Int32" />
-          <NavigationProperty Name="Comments" Relationship="Self.FK__Comments__PId__2A164134" FromRole="Project" ToRole="Comments" />
-          <NavigationProperty Name="Donations" Relationship="Self.FK__Donation__PId__31B762FC" FromRole="Project" ToRole="Donation" />
-          <NavigationProperty Name="GUser" Relationship="Self.FK__Project__ID__02FC7413" FromRole="Project" ToRole="GUser" />
+          <Property Name="MoneyRaised" Type="Double" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK__Comments__PId__4222D4EF" FromRole="Project" ToRole="Comments" />
+          <NavigationProperty Name="Donations" Relationship="Self.FK__Donation__PId__45F365D3" FromRole="Project" ToRole="Donation" />
+          <NavigationProperty Name="GUser" Relationship="Self.FK__Project__ID__3E52440B" FromRole="Project" ToRole="GUser" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -258,19 +240,7 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <Association Name="FK__Comments__ID__29221CFB">
-          <End Role="GUser" Type="Self.GUser" Multiplicity="0..1" />
-          <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GUser">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Comments">
-              <PropertyRef Name="ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Comments__PId__2A164134">
+        <Association Name="FK__Comments__PId__4222D4EF">
           <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
           <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -282,7 +252,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Donation__ID__30C33EC3">
+        <Association Name="FK__Donation__ID__44FF419A">
           <End Role="GUser" Type="Self.GUser" Multiplicity="0..1" />
           <End Role="Donation" Type="Self.Donation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -294,7 +264,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Donation__PId__31B762FC">
+        <Association Name="FK__Donation__PId__45F365D3">
           <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
           <End Role="Donation" Type="Self.Donation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -306,7 +276,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Profile__ID__160F4887">
+        <Association Name="FK__Profile__ID__3A81B327">
           <End Role="GUser" Type="Self.GUser" Multiplicity="0..1" />
           <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
           <ReferentialConstraint>
@@ -318,7 +288,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Project__ID__02FC7413">
+        <Association Name="FK__Project__ID__3E52440B">
           <End Role="GUser" Type="Self.GUser" Multiplicity="0..1" />
           <End Role="Project" Type="Self.Project" Multiplicity="*" />
           <ReferentialConstraint>
@@ -337,27 +307,23 @@
           <EntitySet Name="Profiles" EntityType="Self.Profile" />
           <EntitySet Name="Projects" EntityType="Self.Project" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <AssociationSet Name="FK__Comments__ID__29221CFB" Association="Self.FK__Comments__ID__29221CFB">
-            <End Role="GUser" EntitySet="GUsers" />
-            <End Role="Comments" EntitySet="Comments" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Comments__PId__2A164134" Association="Self.FK__Comments__PId__2A164134">
+          <AssociationSet Name="FK__Comments__PId__4222D4EF" Association="Self.FK__Comments__PId__4222D4EF">
             <End Role="Project" EntitySet="Projects" />
             <End Role="Comments" EntitySet="Comments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Donation__ID__30C33EC3" Association="Self.FK__Donation__ID__30C33EC3">
+          <AssociationSet Name="FK__Donation__ID__44FF419A" Association="Self.FK__Donation__ID__44FF419A">
             <End Role="GUser" EntitySet="GUsers" />
             <End Role="Donation" EntitySet="Donations" />
           </AssociationSet>
-          <AssociationSet Name="FK__Donation__PId__31B762FC" Association="Self.FK__Donation__PId__31B762FC">
+          <AssociationSet Name="FK__Donation__PId__45F365D3" Association="Self.FK__Donation__PId__45F365D3">
             <End Role="Project" EntitySet="Projects" />
             <End Role="Donation" EntitySet="Donations" />
           </AssociationSet>
-          <AssociationSet Name="FK__Profile__ID__160F4887" Association="Self.FK__Profile__ID__160F4887">
+          <AssociationSet Name="FK__Profile__ID__3A81B327" Association="Self.FK__Profile__ID__3A81B327">
             <End Role="GUser" EntitySet="GUsers" />
             <End Role="Profile" EntitySet="Profiles" />
           </AssociationSet>
-          <AssociationSet Name="FK__Project__ID__02FC7413" Association="Self.FK__Project__ID__02FC7413">
+          <AssociationSet Name="FK__Project__ID__3E52440B" Association="Self.FK__Project__ID__3E52440B">
             <End Role="GUser" EntitySet="GUsers" />
             <End Role="Project" EntitySet="Projects" />
           </AssociationSet>
@@ -372,7 +338,7 @@
             <EntityTypeMapping TypeName="GetFundModel.Comment">
               <MappingFragment StoreEntitySet="Comments">
                 <ScalarProperty Name="CommentId" ColumnName="CommentId" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CName" ColumnName="CName" />
                 <ScalarProperty Name="PId" ColumnName="PId" />
                 <ScalarProperty Name="Comment1" ColumnName="Comment" />
               </MappingFragment>
@@ -407,9 +373,9 @@
                 <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="NID" ColumnName="NID" />
-                <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -423,9 +389,9 @@
                 <ScalarProperty Name="VideoLink" ColumnName="VideoLink" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Target" ColumnName="Target" />
-                <ScalarProperty Name="MoneyRaised" ColumnName="MoneyRaised" />
                 <ScalarProperty Name="ProjectImage1" ColumnName="ProjectImage1" />
                 <ScalarProperty Name="Likes" ColumnName="Likes" />
+                <ScalarProperty Name="MoneyRaised" ColumnName="MoneyRaised" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

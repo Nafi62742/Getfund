@@ -20,23 +20,60 @@
 
     <div class="container">
         <h1 class="mb-5">Account Settings</h1>
-        <div class="bg-white shadow rounded-lg d-block d-sm-flex">
+        <div class="bg-white shadow rounded-lg">
             <div class="profile-tab-nav border-right">
                 <div class="p-4">
 
-                    <img src="@Model.ProfilePicture" class="img-circle text-center mb-3" alt="Cinque Terre">
+                    @if (@Model.ProfilePicture != null)
+                    {
+                        <img src="@Model.ProfilePicture" class="img-circle col-md-4" alt="">
+                    }
+                    else
+                    {
+                        <img src="~/images/propic.jpg" class="img-circle col-md-4" alt="">
+
+                    }
+
+
                     <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
                         <!--File Upload Start-->
+                        @using (Html.BeginForm("UploadFiles", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+                                <hr />
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.file, htmlAttributes: new { @class = "control-label" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.file, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                                        @Html.ValidationMessageFor(model => model.file, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        <input type="submit" value="Upload" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-10 text-success">
+                                        @ViewBag.FilePath
+                                    </div>
+                                </div>
+                            </div>
+                        }
                         <!--File Upload End-->
-                        <h4 class="text-center">@Model.Name</h4>
+                        <h4 class="text">@Model.Name</h4>
                         <form action="/Home/DonationHistory" autocomplete="on" class="sign-in-form" method="post">
                             <div>
-                                <input type="hidden" name="IdForDonation" id="IdForDonation" value="@Model.ID"/>
-                                <input type="submit" value="Upload Data" class="btn" />
+                                <input type="hidden" name="IdForDonation" id="IdForDonation" value="@Model.ID" />
+                                <input type="submit" value="Donation History" class="btn" />
                             </div>
                         </form>
                     </div>
-                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="horizontal">
 
                         <a class="nav-link active" id="account-tab" data-toggle="pill" href="#account" role="tab" aria-controls="account" aria-selected="true">
                             <h4>
@@ -117,7 +154,7 @@
                             </div>
                         </div>
                         <div>
-                            <input type="submit" value="Upload Data" class="btn" />
+                            <input type="submit" value="Update Data" class="btn" />
                         </div>
                     </form>
                     <!--Profile work end-->
@@ -152,7 +189,7 @@
                             </div>
                         </div>
                         <div>
-                            <input type="submit" value="Upload Data" class="btn" />
+                            <input type="submit" value="Update Password" class="btn" />
                         </div>
                     </form>
                     <!--Password end-->
@@ -162,7 +199,7 @@
         </div>
     </div>
 
-
+</div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

@@ -17,7 +17,6 @@ namespace Getfund.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public GUser()
         {
-            this.Comments = new HashSet<Comment>();
             this.Donations = new HashSet<Donation>();
             this.Profiles = new HashSet<Profile>();
             this.Projects = new HashSet<Project>();
@@ -28,8 +27,6 @@ namespace Getfund.Models
         public string Password { get; set; }
         public Nullable<bool> IsValid { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comment> Comments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Donation> Donations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

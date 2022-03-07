@@ -28,9 +28,9 @@ namespace Getfund.Models
         public string VideoLink { get; set; }
         public string Type { get; set; }
         public string Target { get; set; }
-        public Nullable<double> MoneyRaised { get; set; }
         public string ProjectImage1 { get; set; }
         public Nullable<int> Likes { get; set; }
+        public Nullable<double> MoneyRaised { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }

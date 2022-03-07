@@ -15,11 +15,10 @@ namespace Getfund.Models
     public partial class Comment
     {
         public int CommentId { get; set; }
-        public Nullable<int> ID { get; set; }
+        public string CName { get; set; }
         public Nullable<int> PId { get; set; }
         public string Comment1 { get; set; }
     
-        public virtual GUser GUser { get; set; }
         public virtual Project Project { get; set; }
     }
 }

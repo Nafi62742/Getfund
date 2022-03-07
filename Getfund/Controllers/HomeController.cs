@@ -208,15 +208,20 @@ namespace Getfund.Controllers
             return View();    
         }
         [HttpPost]
-        public ActionResult Donate(Donation donation)
+        public ActionResult Donate(Donation donation, String CommentArea, Comment comment, string getCname)
         {
-            
+
             db.Donations.Add(donation);
-                db.SaveChanges();
-                return RedirectToAction("Search");
-            
-                TempData["SameProj"] = "Project available with the same name!";
-         
+            db.SaveChanges();
+            comment.CName = getCname;
+            comment.Comment1 = CommentArea;
+            db.Comments.Add(comment);
+            db.SaveChanges();
+            TempData["SameProj"] = "Project available with the same name!";
+            return RedirectToAction("Search");
+
+
+
 
         }
         public ActionResult DonationHistory(int IdForDonation)
@@ -281,7 +286,6 @@ namespace Getfund.Controllers
                         Session["IdUsSS"] = pro.ID.ToString();
                         Session["UsernameSS"] = pro.Name.ToString();
                         Session["UserEmail"] = pro.Email.ToString();
-                        Session["UserAddress"] = pro.Address.ToString();
                         Session["UserEmail"] = pro.Email.ToString();
                         List<Project> projects = db.Projects.ToList();
 
@@ -307,7 +311,7 @@ namespace Getfund.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Register(GUser user , String ConfirmPassword)
+        public ActionResult Register(GUser user, String ConfirmPassword, Profile profile, String RegName)
         {
             if (user.Password.Equals(ConfirmPassword))
             {
@@ -317,10 +321,15 @@ namespace Getfund.Controllers
                 {
                     db.GUsers.Add(user);
                     db.SaveChanges();
+                    profile.ID = user.ID;
+                    profile.Name = RegName;
+                    db.Profiles.Add(profile);
+                    db.SaveChanges();
                     BuildEmailTemplate(user.ID);
                     List<GUser> UsersCheck = db.GUsers.Where(temp => temp.Email.Equals(user.Email)).ToList();
-                    if(UsersCheck.Count > 0) { 
-                        
+                    if (UsersCheck.Count > 0)
+                    {
+
                     }
                     return RedirectToAction("LoginPage");
                 }

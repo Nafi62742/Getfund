@@ -27,7 +27,7 @@ NID int  NULL
 Drop Table Profile
 
 INSERT INTO Profile(ID,Name,Address,NID)
-VALUES (1,'Nafi Ahmed','Mirpur, Dhaka',12456498);
+VALUES (1,'Swap','Mirpur, Dhaka',12456498);
 
 create table Project
 (
@@ -42,12 +42,13 @@ ProjectImage1 varchar(255),
 Likes int,
 MoneyRaised float default 0.00
 );
-Select * From Comments
+Select * From Donation
+Select * From GUser
 
 create table Comments
 (
 CommentId int IDENTITY(1,1) PRIMARY KEY,
-ID int foreign key REFERENCES GUser (ID),
+CName varchar(50),
 PId int foreign key REFERENCES Project (PId),
 Comment varchar(50) NOT NULL,
 );
