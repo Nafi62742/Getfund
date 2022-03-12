@@ -13,15 +13,18 @@ namespace Getfund.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class Profile
+    public partial class Dev
     {
-        
-        public int ProfileId { get; set; }
-        public Nullable<int> ID { get; set; }
+
+        [DataType(DataType.Upload)]
+        [Display(Name = "Upload File")]
+        [Required(ErrorMessage = "Please choose file to upload.")]
+        public string file { get; set; }
+        public int DevId { get; set; }
         public string Name { get; set; }
+        public string Email { get; set; }
         public string ProfilePicture { get; set; }
+        public string DevDescription { get; set; }
         public string Address { get; set; }
-        public Nullable<int> NID { get; set; }
-        public virtual GUser GUser { get; set; }
     }
 }

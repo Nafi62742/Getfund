@@ -86,15 +86,22 @@
                 </div>
 
                 <div class="purchase-info">
+                    @if (TempData["LoggedInUser"].Equals(TempData["ID"]))
+                    {
+
+                    }
+                    else
+                    {
+                        <form action="/Home/DonationPage" class="sign-in-form">
+
+                            <input type="hidden" value="@TempData["Likes"]" name="LikeC" id="LikeC" />
+                            <input type="number" name="DonatedMoney" id="DonatedMoney" min="10" value="10">
+                            <input type="hidden" value="@TempData["PId"]" name="ProjectId" id="ProjectId" />
+                            <input type="submit" value="Donate" class="btn" />
+                        </form>
+                    }
 
 
-                    <form action="/Home/DonationPage" class="sign-in-form">
-                        
-                        <input type="hidden" value="@TempData["Likes"]" name="LikeC" id="LikeC" />
-                        <input type="number" name="DonatedMoney" id="DonatedMoney" min="10" value="10">
-                        <input type="hidden" value="@TempData["PId"]" name="ProjectId" id="ProjectId" />
-                        <input type="submit" value="Donate" class="btn" />
-                    </form>
                 </div>
 
                 <div class="social-links">

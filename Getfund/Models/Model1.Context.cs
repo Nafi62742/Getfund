@@ -26,6 +26,7 @@ namespace Getfund.Models
         }
     
         public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<Dev> DevS { get; set; }
         public virtual DbSet<Donation> Donations { get; set; }
         public virtual DbSet<GUser> GUsers { get; set; }
         public virtual DbSet<Profile> Profiles { get; set; }

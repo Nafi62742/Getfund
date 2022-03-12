@@ -23,58 +23,31 @@
         <div class="bg-white shadow rounded-lg">
             <div class="profile-tab-nav border-right">
                 <div class="p-4">
-                 
-                
+
                     @if (@Model.ProfilePicture != null)
                     {
-                        <img src="@Model.ProfilePicture" class="img-circle col-md-4" alt="">
-                    }
+                        <img src="@Model.ProfilePicture" class="img-circle col-md-4" alt=""> }
                     else
                     {
-                        <img src="~/images/propic.jpg" class="img-circle col-md-4" alt="">
+                        <img src="~/images/propic.jpg" class="img-circle col-md-4" alt="">}
 
-                    }
-                    
 
-                    <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
-                        <!--File Upload Start-->
-                        @using (Html.BeginForm("UploadProfilePic", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                        {
-                            @Html.AntiForgeryToken()
-
-                            <div class="form-horizontal">
-                       
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                <div class="form-group">
-
-                                    <div class="col-md-10">
-                                        @Html.LabelFor(model => model.file, htmlAttributes: new { @class = "control-label" })
-                                        @Html.EditorFor(model => model.file, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                                        @Html.ValidationMessageFor(model => model.file, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-md-10">
-                                        <input type="submit" value="Upload" class="btn btn-primary" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-10 text-success">
-                                        @ViewBag.FilePath
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                        <!--File Upload End-->
-                        <h4 class="text">@Model.Name</h4>
-                        <form action="/Home/DonationHistory" autocomplete="on" class="sign-in-form" method="post">
-                            <div>
-                                <input type="hidden" name="IdForDonation" id="IdForDonation" value="@Model.ID" />
-                                <input type="submit" value="Donation History" class="btn" />
-                            </div>
-                        </form>
-                    </div>
+                    <!--File Upload End-->
+                    <h4 class="text">@Model.Name</h4>
+                    <form action="/Home/DonationHistory" autocomplete="on" class="sign-in-form" method="post">
+                        <div>
+                            <input type="hidden" name="IdForDonation" id="IdForDonation" value="@Model.ID" />
+                            <input type="submit" value="Donation History" class="btn" />
+                        </div>
+                    </form>
+                    <form action="/Home/PictureChanger" autocomplete="on" class="sign-in-form" method="post">
+                        <div>
+                            <input type="hidden" name="EmailForPP" id="EmailForPP" value="@Model.Email" />
+                            <input type="hidden" name="IdForPP" id="IdForPP" value="@Model.ProfileId"/>
+                            <input type="submit" value="Change Picture" class="btn" />
+                        </div>
+                    </form>
+                </div>
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="horizontal">
 
                         <a class="nav-link active" id="account-tab" data-toggle="pill" href="#account" role="tab" aria-controls="account" aria-selected="true">
@@ -95,113 +68,113 @@
 
                     </div>
                 </div>
-            <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
-                <div class="tab-pane fade show-active" id="account" role="tabpanel" aria-labelledby="account-tab">
-                    <h3 class="mb-4">Account Settings</h3>
-                    <!--Profile work starts-->
-                    <form action="/Home/Profile" autocomplete="on" class="sign-in-form" method="post">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Name</label>
-                                    <input type="text" name="Name" id="Name" class="form-control" value="@Model.Name">
+                <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+                    <div class="tab-pane fade show-active" id="account" role="tabpanel" aria-labelledby="account-tab">
+                        <h3 class="mb-4">Account Settings</h3>
+                        <!--Profile work starts-->
+                        <form action="/Home/Profile" autocomplete="on" class="sign-in-form" method="post">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <input type="text" name="Name" id="Name" class="form-control" value="@Model.Name">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="hidden" name="ID" id="ID" class="form-control" value="@Model.ID">
-                                    <input type="hidden" name="ProfileId" id="ProfileId" class="form-control" value="@Model.ProfileId">
-                                    <input type="hidden" name="Email" id="Email" class="form-control" value="@Model.Email">
-                                    <input type="text" class="form-control" value="@Model.Email" disabled>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="hidden" name="ID" id="ID" class="form-control" value="@Model.ID">
+                                        <input type="hidden" name="ProfileId" id="ProfileId" class="form-control" value="@Model.ProfileId">
+                                        <input type="hidden" name="Email" id="Email" class="form-control" value="@Model.Email">
+                                        <input type="text" class="form-control" value="@Model.Email" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>NID number</label>
+                                        <input type="text" name="NID" id="NID" class="form-control" value="@Model.NID" placeholder="Please give your NID">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>NID number</label>
-                                    <input type="text" name="NID" id="NID" class="form-control" value="@Model.NID" placeholder="Please give your NID">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Address</label>
+                                        <input type="text" name="Address" id="Address" class="form-control" value="@Model.Address">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Occupation</label>
+                                        <input type="text" class="form-control" value="Software developer">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Address</label>
-                                    <input type="text" name="Address" id="Address" class="form-control" value="@Model.Address">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Bio</label>
+                                        <textarea class="form-control" rows="4">Description about the user will be here.</textarea>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Occupation</label>
-                                    <input type="text" class="form-control" value="Software developer">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <input type="password" name="CPassword" id="CPassword" class="form-control" placeholder="Password needed">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Bio</label>
-                                    <textarea class="form-control" rows="4">Description about the user will be here.</textarea>
-                                </div>
+                            <div>
+                                <input type="submit" value="Update Data" class="btn" />
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <input type="password" name="CPassword" id="CPassword" class="form-control" placeholder="Password needed">
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <input type="submit" value="Update Data" class="btn" />
-                        </div>
-                    </form>
-                    <!--Profile work end-->
-                </div>
-                <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
-                    <form action="/Home/Profile" autocomplete="on" class="sign-in-form" method="post">
-                        <h3 class="mb-4">Password Settings</h3>
+                        </form>
+                        <!--Profile work end-->
+                    </div>
+                    <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+                        <form action="/Home/Profile" autocomplete="on" class="sign-in-form" method="post">
+                            <h3 class="mb-4">Password Settings</h3>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Old password</label>
-                                    <input type="hidden" name="ID" id="ID" class="form-control" value="@Model.ID">
-                                    <input type="hidden" name="IsValid" id="IsValid" class="form-control" value="TRUE">
-                                    <input type="hidden" name="Email" id="Email" class="form-control" value="@Model.Email">
-                                    <input type="password" name="OldPassword" id="OldPassword" class="form-control" placeholder="Old password">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Old password</label>
+                                        <input type="hidden" name="ID" id="ID" class="form-control" value="@Model.ID">
+                                        <input type="hidden" name="IsValid" id="IsValid" class="form-control" value="TRUE">
+                                        <input type="hidden" name="Email" id="Email" class="form-control" value="@Model.Email">
+                                        <input type="password" name="OldPassword" id="OldPassword" class="form-control" placeholder="Old password">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>New password</label>
-                                    <input type="password" name="Password" class="form-control" placeholder="New password">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>New password</label>
+                                        <input type="password" name="Password" class="form-control" placeholder="New password">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Confirm new password</label>
+                                        <input type="password" name="ConfirmPassword" class="form-control" placeholder="Confirm password">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Confirm new password</label>
-                                    <input type="password" name="ConfirmPassword" class="form-control" placeholder="Confirm password">
-                                </div>
+                            <div>
+                                <input type="submit" value="Update Password" class="btn" />
                             </div>
-                        </div>
-                        <div>
-                            <input type="submit" value="Update Password" class="btn" />
-                        </div>
-                    </form>
-                    <!--Password end-->
-                </div>
+                        </form>
+                        <!--Password end-->
+                    </div>
 
+                </div>
             </div>
         </div>
-    </div>
 
-</div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

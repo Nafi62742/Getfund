@@ -136,9 +136,13 @@
     <Compile Include="Models\Comment.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Dev.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Donation.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FileUploadModel.cs" />
     <Compile Include="Models\GUser.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -258,8 +262,11 @@
     <Content Include="Views\Home\PostProject.cshtml" />
     <Content Include="Views\Home\DonationPage.cshtml" />
     <Content Include="Views\Home\Donate.cshtml" />
-    <Content Include="Views\Home\UploadProfilePic.cshtml" />
     <Content Include="Views\Home\DonationHistory.cshtml" />
+    <Content Include="Views\Home\DevAdd.cshtml" />
+    <Content Include="Views\Home\DevAdding.cshtml" />
+    <Content Include="Views\Home\PictureChanger.cshtml" />
+    <Content Include="Views\Home\PictureUpdated.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

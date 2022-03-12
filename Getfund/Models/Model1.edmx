@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="GetFundModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="GetFundModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Comments">
           <Key>
             <PropertyRef Name="CommentId" />
@@ -13,6 +13,17 @@
           <Property Name="CName" Type="varchar" MaxLength="50" />
           <Property Name="PId" Type="int" />
           <Property Name="Comment" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DevS">
+          <Key>
+            <PropertyRef Name="DevId" />
+          </Key>
+          <Property Name="DevId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProfilePicture" Type="varchar" MaxLength="255" />
+          <Property Name="DevDescription" Type="varchar" MaxLength="255" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Donation">
           <Key>
@@ -123,6 +134,7 @@
         </Association>
         <EntityContainer Name="GetFundModelStoreContainer">
           <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DevS" EntityType="Self.DevS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Donation" EntityType="Self.Donation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GUser" EntityType="Self.GUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
@@ -148,7 +160,8 @@
             <End Role="Project" EntitySet="Project" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GetFundModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -161,6 +174,17 @@
           <Property Name="PId" Type="Int32" />
           <Property Name="Comment1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Project" Relationship="Self.FK__Comments__PId__412EB0B6" FromRole="Comments" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Dev">
+          <Key>
+            <PropertyRef Name="DevId" />
+          </Key>
+          <Property Name="DevId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProfilePicture" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DevDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Donation">
           <Key>
@@ -280,6 +304,7 @@
         </Association>
         <EntityContainer Name="GetFundEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Comments" EntityType="Self.Comment" />
+          <EntitySet Name="DevS" EntityType="Self.Dev" />
           <EntitySet Name="Donations" EntityType="Self.Donation" />
           <EntitySet Name="GUsers" EntityType="Self.GUser" />
           <EntitySet Name="Profiles" EntityType="Self.Profile" />
@@ -318,6 +343,18 @@
                 <ScalarProperty Name="CName" ColumnName="CName" />
                 <ScalarProperty Name="PId" ColumnName="PId" />
                 <ScalarProperty Name="Comment1" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DevS">
+            <EntityTypeMapping TypeName="GetFundModel.Dev">
+              <MappingFragment StoreEntitySet="DevS">
+                <ScalarProperty Name="DevId" ColumnName="DevId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
+                <ScalarProperty Name="DevDescription" ColumnName="DevDescription" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -31,19 +31,50 @@ namespace Getfund.Controllers
             {
                 List<Project> projects = db.Projects.OrderByDescending(x => x.Likes).Take(3).ToList();
                 return View(projects);
-                
-
             }
-            
-              
         }
-
-        public ActionResult About()
+        public ActionResult PictureChanger()
         {
-            ViewBag.Message = "";
+            if (Session["IdUsSS"] != null)
+            {
 
-            return View();
+                return View();
+            }
+            else 
+            {
+                return RedirectToAction("LoginPage");
+            }
         }
+        public ActionResult PictureUpdated()
+        {
+            if (Session["IdUsSS"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("LoginPage");
+            }
+        }
+        [HttpPost]
+        public ActionResult PictureUpdated(string ProfilePicture)
+        {
+            Profile user = new Profile();
+            user = db.Profiles.SingleOrDefault(x => x.ID==idUser);
+            if (user != null)
+            {
+                user.ProfilePicture = ProfilePicture;
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Profile");//redirecting to userprofile once again
+            }
+            else
+            {
+                return View("Search");
+            }
+
+        }
+
         public ActionResult ProjectList()
         {
             if (Session["IdUsSS"] != null)
@@ -99,9 +130,9 @@ namespace Getfund.Controllers
             }
             
         }
-        
+
         [HttpPost]
-        public ActionResult UploadFiles(HttpPostedFileBase file)
+        public ActionResult UploadFiles(HttpPostedFileBase file, Profile profile)
         {
             if (ModelState.IsValid)
             {
@@ -112,20 +143,19 @@ namespace Getfund.Controllers
                         string path = Path.Combine(Server.MapPath("~/UploadFiles"), Path.GetFileName(file.FileName));
                         ViewBag.FilePath = "Pic loaded click post to save.";
                         ViewBag.FileStatus = "/UploadFiles/" + Path.GetFileName(file.FileName);
-                        file.SaveAs(path); 
+                        file.SaveAs(path);
                     }
-                    
-                    
                 }
                 catch (Exception)
                 {
-
                     ViewBag.FileStatus = "Error while file uploading.";
                 }
-
-            }
+            } 
+            
             return View("Post");
+            
         }
+        [HttpPost]
         public ActionResult UploadProfilePic(HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
@@ -145,7 +175,7 @@ namespace Getfund.Controllers
                     ViewBag.FileStatus = "Error while file uploading.";
                 }
             }
-            return View("Profile");
+            return View("PictureChanger");
         }
         [HttpGet]
         public ActionResult PostProject()
@@ -153,6 +183,7 @@ namespace Getfund.Controllers
             ViewBag.Message = "";
             return View();
         }
+
         [HttpPost]
         public ActionResult PostProject(Project UpProj)
         {
@@ -203,11 +234,31 @@ namespace Getfund.Controllers
             ViewBag.Message = "Donating to project";
             return View(Detail);
         }
+        public ActionResult About()
+        {
+            ViewBag.Message = "";
+            return View();
+        }
+        [HttpGet]
+        public ActionResult DevAdd()
+        {
+            return View();
+        }
+        public ActionResult DevAdding()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult DevAdd(Project UpProj)
+        {
+            return View();
+        }
         public ActionResult Donate()
         {
 
             return View();    
         }
+        
         [HttpPost]
         public ActionResult Donate(Donation donation, String CommentArea, Comment comment, string getCname,int PId,String PTittle,String Liked)
         {
@@ -231,6 +282,7 @@ namespace Getfund.Controllers
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges(); //redirecting to userprofile once again
 
+                donation.ID = idUser;
                 db.Donations.Add(donation);
                 db.SaveChanges();
                 comment.CName = getCname;
@@ -253,11 +305,7 @@ namespace Getfund.Controllers
             List<Donation> donations = db.Donations.Where(temp => temp.ID==IdForDonation).ToList();
            
             return View(donations);
-
-
         }
-
-
         public ActionResult Search(string email, string LoginPass)
         {
 
@@ -279,14 +327,12 @@ namespace Getfund.Controllers
                 ViewBag.Message = pro.Name;
                 List<Project> projects = db.Projects.OrderByDescending(x => x.Likes).Take(3).ToList();
                 return View(projects);
-
             }
             else
             {List<GUser> Users = db.GUsers.Where(temp => temp.Email.Equals(email) && temp.Password.Equals(LoginPass)).ToList();
 
                 if (Users.Count > 0)
                 {
-
                     var pro = (from g in db.GUsers
                                join p in db.Profiles on g.ID equals p.ID
                                where g.Email == email
@@ -312,7 +358,6 @@ namespace Getfund.Controllers
                         Session["UserEmail"] = pro.Email.ToString();
                         Session["UserEmail"] = pro.Email.ToString();
                         List<Project> projects = db.Projects.OrderByDescending(x => x.Likes).Take(3).ToList();
-
                         return View(projects);
                     }
                     else
@@ -361,14 +406,12 @@ namespace Getfund.Controllers
                 {
                     TempData["LoginError"] = "Check password or username!";
                     return RedirectToAction("Register");
-
                 }
             }
             else
             {
                 TempData["LoginError"] = "Password Doesn't match!";
                 return RedirectToAction("Register");
-
             }
 
 
@@ -408,15 +451,11 @@ namespace Getfund.Controllers
             BuildEmailTemplate(user.ID);
             return RedirectToAction("LoginPage");
             }
-            
-           
         }
-      
         public ActionResult Contact()
         {
             return View();
         }
-
         public ActionResult Profile()
         {
             var pro = (from g in db.GUsers
@@ -440,10 +479,7 @@ namespace Getfund.Controllers
             {
                  return View(pro);
             }
-            
         }
-
-
         [HttpPost]
         public ActionResult Profile(GUser user, String ConfirmPassword, String OldPassword, String CPassword, Profile profile)
         {
@@ -451,12 +487,8 @@ namespace Getfund.Controllers
             {
                 if (user.Password.Equals(ConfirmPassword))
                 {
-                    
                     db.Entry(user).State = EntityState.Modified;
                     db.SaveChanges();
-                    
-                    
-
                     var pro = (from g in db.GUsers
                                join p in db.Profiles on g.ID equals p.ID
                                where g.ID == idUser
@@ -530,12 +562,7 @@ namespace Getfund.Controllers
                     {
                         return View(pro);
                     }
-
-                
-                
-
             }
-
         }
         public ActionResult Project()
         {
@@ -566,7 +593,8 @@ namespace Getfund.Controllers
                                   MoneyRaised = pj.MoneyRaised,
                                   LikesP = (pj.Likes + 1),
                               }).SingleOrDefault();
-                
+                TempData["LoggedInUser"]=idUser;
+
                 TempData["PId"] = Detail.PId;
                 TempData["ID"] = Detail.ID;
                 TempData["Name"] = Detail.Name;

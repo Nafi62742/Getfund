@@ -4,12 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="27b1e83ffab0464eb0a31d69d8f8190d" Name="Diagram1">
-        <EntityTypeShape EntityType="GetFundModel.Comment" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GetFundModel.Donation" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
+      <Diagram DiagramId="2a2a914cae8e4ad88a08c26c9792f14c" Name="Diagram1">
+        <EntityTypeShape EntityType="GetFundModel.Comment" Width="1.5" PointX="5.25" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GetFundModel.Dev" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GetFundModel.Donation" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="GetFundModel.GUser" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="GetFundModel.Profile" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="GetFundModel.Project" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GetFundModel.Project" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
         <AssociationConnector Association="GetFundModel.FK__Comments__PId__412EB0B6" ManuallyRouted="false" />
         <AssociationConnector Association="GetFundModel.FK__Donation__ID__4222D4EF" ManuallyRouted="false" />
         <AssociationConnector Association="GetFundModel.FK__Donation__PId__4316F928" ManuallyRouted="false" />
