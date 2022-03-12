@@ -176,6 +176,7 @@
     <Content Include="Content\details.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\post.css" />
+    <Content Include="Content\profile.css" />
     <Content Include="Content\project.css" />
     <Content Include="images\b1.png" />
     <Content Include="images\f1.jpg" />

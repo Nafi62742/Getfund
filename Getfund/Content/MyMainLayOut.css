@@ -29,7 +29,7 @@ body {
 
 img {
     max-width: 100%;
-    height:auto;
+    height: auto;
 }
 
 a {
@@ -56,8 +56,8 @@ a {
     z-index: 10;
 }
 
-h1,h3{
-    font-weight:bold;
+h1, h3 {
+    font-weight: bold;
 }
 
 h3 {
@@ -67,7 +67,7 @@ h3 {
 .text {
     font-weight: bold;
     color: #8E8E8E;
-    font-size:30px;
+    font-size: 30px;
 }
 
 .headd {
@@ -86,7 +86,6 @@ h3 {
 }
 
 .logo {
-    display: flex;
     align-items: center;
     cursor: pointer;
 }
@@ -190,17 +189,78 @@ h3 {
 }
 
 
+/*new nav*/
+
+nav {
+    height: 80px;
+    width: 100%;
+    padding-left: 10rem;
+    padding-right: 10rem;
+}
+
+
+label.logo {
+    color: darkgreen;
+    font-size: 35px;
+    line-height: 80px;
+    font-weight: bold;
+}
+
+.fa, .fas {
+    font-weight: 900;
+    color: black;
+}
+
+nav ul {
+    float: right;
+    margin-right: 20px;
+}
+
+    nav ul li {
+        display: inline-block;
+        line-height: 80px;
+        margin: 0 5px;
+    }
+
+        nav ul li a {
+            color: #A0A0A0;
+            font-size: 17px;
+            padding: 7px 13px;
+            border-radius: 3px;
+            text-transform: uppercase;
+        }
+
+a.active, a:hover {
+    background: #1b9bff;
+    transition: .5s;
+}
+
+.checkbtn {
+    font-size: 30px;
+    color: white;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+}
+
+#check {
+    display: none;
+}
+
+
 /*aro kisu */
 .showcase-area {
     background: #EEF1ED;
 }
-.showcase-area .container {
-    display: grid;
-    grid-template-columns: repeat(4, 50%);
-    align-items: center;
-    justify-content: center;
-    
-}
+
+    .showcase-area .container {
+        display: grid;
+        grid-template-columns: repeat(4, 50%);
+        align-items: center;
+        justify-content: center;
+    }
 
 .big-title {
     font-size: 1.4rem;
@@ -213,9 +273,8 @@ h3 {
     font-size: 2.1rem;
     margin: 1.9rem 0 2.5rem;
     font-weight: bold;
-    color: #8E8E8E;  
+    color: #8E8E8E;
     max-width: 600px;
- 
 }
 
 .showcase-area .btn {
@@ -223,7 +282,6 @@ h3 {
 }
 
 .person {
-    
 }
 
 .toggle-btn {
@@ -368,7 +426,6 @@ h3 {
 
 .card-body2 {
     padding: 100px;
-    
 }
 
 
@@ -377,11 +434,11 @@ h3 {
     height: 100%;
 }
 
-.card-tt{
-    font-size:40px;
-    font-weight:bold;
-    line-height:40px;
-    color:black;
+.card-tt {
+    font-size: 40px;
+    font-weight: bold;
+    line-height: 40px;
+    color: black;
 }
 
 .card-txt {
@@ -390,23 +447,23 @@ h3 {
     line-height: 40px;
     color: grey;
 }
+
 .btn {
     background: #008037;
     color: white;
-    text-align:center;
-    padding:10px;
-   
-    font-size:15px;
-    font-weight:bold;
+    text-align: center;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: bold;
     box-shadow: 2px 2px #888888;
 }
+
     .btn:hover {
         background: #009942;
-        
     }
 
-.b-pic{
-    margin-left:-50px;
+.b-pic {
+    margin-left: -50px;
 }
 
 /*CAROUSEL*/
@@ -467,35 +524,33 @@ h3 {
 .container2 {
     margin-top: 3%;
     align-items: center;
-
-    
 }
 
 .row {
     height: 100%;
-    
 }
 
 
 .card {
     border-radius: 1rem;
     background: #B5EACF;
-    border:hidden;
+    border: hidden;
 }
 
 .inner {
     overflow: hidden;
     border-radius: 1rem;
-    max-height:290.37px;
-    max-width:326.66px;
+    max-height: 290.37px;
+    max-width: 326.66px;
 }
 
-.inner .img{
-    transition: all 1.5s ease;
-}
-.inner:hover img{
-    transform:scale(1.5);
-}
+    .inner .img {
+        transition: all 1.5s ease;
+    }
+
+    .inner:hover img {
+        transform: scale(1.5);
+    }
 
 .card-title {
     font-size: large;
@@ -510,10 +565,10 @@ h3 {
 
 .btn:hover {
     color: #ffff;
-    
 }
-.img-fluid{
-    border-radius:1rem;
+
+.img-fluid {
+    border-radius: 1rem;
 }
 
 
@@ -530,12 +585,12 @@ h3 {
     border-bottom: 1px solid #ddd;
     border-radius: 0;
     color: #333;
-    font-size:16px;
+    font-size: 16px;
 }
 
     .nav-pills a.nav-link i {
         width: 20px;
-        height:20px;
+        height: 20px;
     }
 
 .img-circle img {
@@ -563,7 +618,64 @@ h3 {
     }
 }
 
+@media (max-width: 1170px) {
+    nav ul li a {
+        font-size: 10px;
+    }
+}
 
+
+@media (max-width: 952px) {
+    label.logo {
+        font-size: 30px;
+        padding-left: 50px;
+    }
+
+    nav ul li a {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 858px) {
+    .checkbtn {
+        display: block;
+    }
+
+    ul {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: #C3D3C9;
+        top: 80px;
+        left: -100%;
+        text-align: center;
+        transition: all .5s;
+    }
+
+    nav ul li {
+        display: block;
+        margin: 50px 0;
+        line-height: 30px;
+    }
+
+        nav ul li a {
+            font-size: 20px;
+        }
+
+    a:hover, a.active {
+        background: none;
+        color: #0082e6;
+    }
+
+    #check:checked ~ ul {
+        left: 0;
+    }
+
+    section {
+        background: url(bg1.jpg) no-repeat;
+        background-size: cover;
+    }
+}
 
 
 
@@ -572,6 +684,38 @@ h3 {
         display: flex;
     }
 
+    /*new*/
+    ul {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: #C3D3C9;
+        top: 80px;
+        left: -100%;
+        text-align: center;
+        transition: all .5s;
+        z-index: 50;
+    }
+
+    nav ul li {
+        display: block;
+        margin: 50px 0;
+        line-height: 30px;
+    }
+
+        nav ul li a {
+            font-size: 20px;
+        }
+
+    a:hover, a.active {
+        background: none;
+        color: #0082e6;
+    }
+
+    #check:checked ~ ul {
+        left: 0;
+    }
+    /*new*/
     .links {
         position: fixed;
         top: 0;
@@ -642,17 +786,11 @@ h3 {
     }
 
     .text {
-        
         margin: 1.4rem 0 1.5rem;
-        
-
-
-    font-size: 1.5rem;
-  
-    font-weight: bold;
-    color: #8E8E8E;
-    max-width: 600px;
-
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #8E8E8E;
+        max-width: 600px;
     }
 
     .person {
@@ -671,7 +809,6 @@ h3 {
 
     .row {
         height: 100%;
-        
     }
 }
 
@@ -704,6 +841,5 @@ h3 {
 
     .row {
         height: 100%;
-        
     }
 }
