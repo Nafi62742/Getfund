@@ -57,17 +57,18 @@
                 <h2 class="product-title">@TempData["Title"]</h2>
 
                 <div class="heart-btn">
-                    <div class="content" onclick="returnView">
+                    <div class="content" onclick="returnView()">
                         <span class="heart"></span>
                         <span class="text">❤️ Like</span>
-                        <span class="numb" style="--number-n : @TempData["MoneyRaised"]; --number-n2 : @TempData["MoneyRaisedP"]"></span>
-
+                        <span class=""  id="likeCount">@TempData["Likes"]</span>
                     </div>
                 </div>
                 <div class="product-price">
                     <p class="last-price">Goal: <span>@TempData["Target"]</span></p>
                     <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated pgbar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        <input type="range" min="1" max="@TempData["Target"]" value="@TempData["MoneyRaised"]" class="slider" id="myRange" disabled>
+
+                        
                     </div>
                     <p class="new-price">Raised: <span>@TempData["MoneyRaised"]</span></p>
                 </div>
@@ -89,6 +90,8 @@
 
 
                     <form action="/Home/DonationPage" class="sign-in-form">
+                        
+                        <input type="hidden" value="@TempData["Likes"]" name="LikeC" id="LikeC" />
                         <input type="number" name="DonatedMoney" id="DonatedMoney" min="10" value="10">
                         <input type="hidden" value="@TempData["PId"]" name="ProjectId" id="ProjectId" />
                         <input type="submit" value="Donate" class="btn" />
@@ -122,4 +125,13 @@
 
 </div>
 
+<script>
+    function returnView() {
+        const count = "@TempData["Likes"]";
+        document.getElementById("likeCount").innerText = parseInt(count) + 1;
+        console.log(count);
+        document.getElementById("LikeC").value = document.getElementById("likeCount").innerText;
+    }
+
+</script>
 <script src="~/Scripts/script.js"></script>

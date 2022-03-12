@@ -27,7 +27,7 @@ namespace Getfund.Models
         public string Info { get; set; }
         public string VideoLink { get; set; }
         public string Type { get; set; }
-        public string Target { get; set; }
+        public Nullable<double> Target { get; set; }
         public string ProjectImage1 { get; set; }
         public Nullable<int> Likes { get; set; }
         public Nullable<double> MoneyRaised { get; set; }

@@ -14,7 +14,6 @@ namespace Getfund.Models
     
     public partial class Donation
     {
-
         public int DonationId { get; set; }
         public Nullable<int> ID { get; set; }
         public Nullable<int> PId { get; set; }

@@ -65,8 +65,11 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Project Owner</label>
-                                    <input type="hidden" class="form-control" name="PId" id="PId" value="@Model.PId" >
-                                    <input class="form-control" type="hidden" name="ID" id="ID" value="@Model.ID" >
+                                    
+                                    <input type="hidden" class="form-control" name="Liked" id="Liked" value="@TempData["LikeC"]">
+                                    <input type="hidden" class="form-control" name="PTittle" id="PTittle" value="@TempData["Title"]">
+                                    <input type="hidden" class="form-control" name="PId" id="PId" value="@Model.PId">
+                                    <input class="form-control" type="hidden" name="ID" id="ID" value="@Model.ID">
                                     <input type="text" class="form-control" value="@Model.Name">
                                 </div>
                             </div>

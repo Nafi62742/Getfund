@@ -29,7 +29,7 @@ namespace Getfund.Controllers
             }
             else
             {
-                List<Project> projects = db.Projects.ToList();
+                List<Project> projects = db.Projects.OrderByDescending(x => x.Likes).Take(3).ToList();
                 return View(projects);
                 
 
@@ -174,7 +174,7 @@ namespace Getfund.Controllers
         
         }
       
-        public ActionResult DonationPage(int ProjectId, int DonatedMoney)
+        public ActionResult DonationPage(int ProjectId, int DonatedMoney,String LikeC)
         {
             var Detail = (from pj in db.Projects
                           join p in db.Profiles on pj.ID equals p.ID
@@ -198,6 +198,7 @@ namespace Getfund.Controllers
             TempData["Donationdate"] = now.ToString();
             TempData["Idcheck"] = Detail.ID;
             TempData["Idcheck"] = Detail.PId;
+            TempData["LikeC"] = LikeC;
             TempData["DonatedMoney"] = Convert.ToInt32( DonatedMoney) ;
             ViewBag.Message = "Donating to project";
             return View(Detail);
@@ -208,15 +209,38 @@ namespace Getfund.Controllers
             return View();    
         }
         [HttpPost]
-        public ActionResult Donate(Donation donation, String CommentArea, Comment comment, string getCname)
+        public ActionResult Donate(Donation donation, String CommentArea, Comment comment, string getCname,int PId,String PTittle,String Liked)
         {
+            Project user = new Project();
+            TempData["data"] = PId;
+            user = db.Projects.SingleOrDefault(x => x.PId.Equals(PId));
+            if (user != null)
+            {
+                if(user.MoneyRaised == null)
+                {
+                    user.MoneyRaised = 0;
+                    user.MoneyRaised += donation.Amount;
+                    user.Likes = Convert.ToInt32(Liked);
+                }
+                else
+                {
+                    user.MoneyRaised += donation.Amount;
+                    user.Likes = Convert.ToInt32(Liked);
+                }
+                
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges(); //redirecting to userprofile once again
 
-            db.Donations.Add(donation);
-            db.SaveChanges();
-            comment.CName = getCname;
-            comment.Comment1 = CommentArea;
-            db.Comments.Add(comment);
-            db.SaveChanges();
+                db.Donations.Add(donation);
+                db.SaveChanges();
+                comment.CName = getCname;
+                comment.Comment1 = CommentArea;
+                db.Comments.Add(comment);
+                db.SaveChanges();
+            
+            }
+            
+            
             TempData["SameProj"] = "Project available with the same name!";
             return RedirectToAction("Search");
 
@@ -253,7 +277,7 @@ namespace Getfund.Controllers
                                NID = p.NID,
                            }).SingleOrDefault();
                 ViewBag.Message = pro.Name;
-                List<Project> projects = db.Projects.ToList();
+                List<Project> projects = db.Projects.OrderByDescending(x => x.Likes).Take(3).ToList();
                 return View(projects);
 
             }
@@ -287,7 +311,7 @@ namespace Getfund.Controllers
                         Session["UsernameSS"] = pro.Name.ToString();
                         Session["UserEmail"] = pro.Email.ToString();
                         Session["UserEmail"] = pro.Email.ToString();
-                        List<Project> projects = db.Projects.ToList();
+                        List<Project> projects = db.Projects.OrderByDescending(x => x.Likes).Take(3).ToList();
 
                         return View(projects);
                     }
@@ -515,7 +539,7 @@ namespace Getfund.Controllers
         }
         public ActionResult Project()
         {
-            List<Project> projects = db.Projects.ToList();
+            List<Project> projects = db.Projects.OrderByDescending(x=>x.Likes).ToList();
             return View(projects);
         }
 
@@ -537,9 +561,10 @@ namespace Getfund.Controllers
                                   VideoLink = pj.VideoLink,
                                   Info = pj.Info,
                                   Type = pj.Type,
+                                  Likes = pj.Likes,
                                   Target = pj.Target,
                                   MoneyRaised = pj.MoneyRaised,
-                                  MoneyRaisedP = (pj.MoneyRaised + 1),
+                                  LikesP = (pj.Likes + 1),
                               }).SingleOrDefault();
                 
                 TempData["PId"] = Detail.PId;
@@ -552,8 +577,19 @@ namespace Getfund.Controllers
                 TempData["Info"] = Detail.Info;
                 TempData["Type"] = Detail.Type;
                 TempData["Target"] = Detail.Target;
-                TempData["MoneyRaised"] = Detail.MoneyRaised;
-                TempData["MoneyRaisedP"] = Detail.MoneyRaisedP;
+                TempData["MoneyRaised"] = Convert.ToInt32(Detail.MoneyRaised);
+                TempData["MoneyPercentage"] = (Convert.ToDouble(Detail.MoneyRaised) / Convert.ToDouble(Detail.Target))*100;
+                if (Detail.Likes == null)
+                {
+                    TempData["Likes"] = 0;
+                    TempData["Likes"] = 0;
+                }
+                else
+                {
+                TempData["Likes"] = Detail.Likes;
+                }
+                
+                TempData["LikesP"] = Detail.LikesP;
 
                 List<Comment> comments = db.Comments.ToList();
                 return View(comments);

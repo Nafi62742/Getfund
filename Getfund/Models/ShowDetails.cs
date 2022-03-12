@@ -10,7 +10,8 @@ namespace Getfund.Models
     public class ShowDetails
     {
         public int ProfileId { get; set; }
-        
+
+        public Nullable<int> Likes { get; set; }
         public int PId { get; set; }
         public Nullable<int> ID { get; set; }
         public string Name { get; set; }
@@ -20,8 +21,8 @@ namespace Getfund.Models
         public string Info { get; set; }
         public string VideoLink { get; set; }
         public string Type { get; set; }
-        public string Target { get; set; }
+        public Nullable<double> Target { get; set; }
         public Nullable<double> MoneyRaised { get; set; }
-        public Nullable<double> MoneyRaisedP { get; set; }
+        public Nullable<double> LikesP { get; set; }
     }
 }

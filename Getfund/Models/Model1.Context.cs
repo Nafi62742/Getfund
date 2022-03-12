@@ -30,6 +30,5 @@ namespace Getfund.Models
         public virtual DbSet<GUser> GUsers { get; set; }
         public virtual DbSet<Profile> Profiles { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }
