@@ -1,4 +1,59 @@
-﻿@{
+﻿@model List<Getfund.Models.Dev>
+
+
+@{
     ViewBag.Title = "About";
 }
 
+
+
+
+<head>
+    <link href="~/Content/project.css" rel="stylesheet" type="text/css" />
+</head>
+
+<div class="container">
+
+
+
+    <div class="container2">
+        <div class="row justify-content-center">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-md-4">
+                    <div class="card shadow" style="width: 100%;">
+                        <div class="inner">
+                            <img src="@item.ProfilePicture" class="card-img-top" alt="...">
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title">@item.Name</h5>
+                            <p class="card-text">@item.Email</p>
+                            <p class="card-text">@item.DevDescription</p>
+                            <p class="card-text">@item.Address</p>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (TempData["AdminHere"] != null)
+            {
+                <form action="/Home/DevAdd" autocomplete="off" class="sign-up-form">
+
+                    <input type="submit" value="Add new Developer Info" class="btn" />
+                </form>
+            }
+            <!--
+                <form action="/Home/DevAdd" autocomplete="off" class="sign-up-form">
+
+                    <input type="submit" value="Add new Developer Info" class="btn" />
+                </form> 
+            -->
+
+
+        </div>
+    </div>
+
+
+</div>

@@ -7,7 +7,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">#</th>
+            
             <th scope="col">PId</th>
             <th scope="col">DonateTime</th>
             <th scope="col">Project Describtion</th>
@@ -15,15 +15,18 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @if (Model != null)
         {
-            <tr>
-                <th scope="row">@item.DonationId</th>
-                <td>@item.PId</td>
-                <td>@item.DonateTime</td>
-                <td>@item.DonateDes</td>
-                <td>@item.Amount</td>
-            </tr>
+            foreach (var item in Model)
+            {
+                <tr>
+                    
+                    <td>@item.PId</td>
+                    <td>@item.DonateTime</td>
+                    <td>@item.DonateDes</td>
+                    <td>@item.Amount</td>
+                </tr>
+            }
         }
-    </tbody>
+        </tbody>
 </table>

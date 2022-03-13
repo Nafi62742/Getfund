@@ -1,8 +1,123 @@
-﻿@model Getfund.Models.Dev
-
+﻿@model Getfund.Models.FileUploadModel
 @{
     ViewBag.Title = "DevAdd";
 }
+<head>
 
-<h2>DevAdd</h2>
+    <link rel="stylesheet" href="~/Content/post.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+<body>
+
+
+    <main>
+        <div class="box">
+            <div class="inner-box">
+
+                <!--File Upload Start-->
+                <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+                    @using (Html.BeginForm("UploadDevPic", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.file, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.file, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                                    @Html.ValidationMessageFor(model => model.file, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Upload" class="btn btn-primary" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10 text-success">
+                                    @ViewBag.FilePath
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <!--File Upload End-->
+                    <!--File Upload All Data Post Start-->
+                    <form action="/Home/DevAdding" autocomplete="on" class="sign-in-form" method="post">
+
+                        <h3 class="mb-4">Devoloper Details</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label> Name</label>
+                                    <input type="text" class="form-control" name="Name" id="Name" value="" placeholder="name">
+
+
+                                    <input type="hidden" name="ProfilePicture" id="ProfilePicture" class="form-control" value="@ViewBag.FileStatus">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label> Email</label>
+                                    <input type="text" class="form-control" name="Email" id="Email" value="" placeholder="email">
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Developers description</label>
+                                    <textarea class="form-control" name="DevDescription" id="DevDescription" rows="4" placeholder="Description about the user will be here."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label> Adress</label>
+                                        <input type="text" class="form-control" name="Address" id="Address" value="" placeholder="address">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            @if (TempData["Same"] != null)
+                            {
+                                <p style="color:red">@TempData["Same"]</p>
+                            }
+                            <input type="submit" value="Submit Data" class="btn" style="float:left;margin-right:2rem" />
+                        </div>
+                    </form>
+                    <!--File Upload All Data Post End-->
+                    <div>
+                        <form action="/Home/About" autocomplete="on" class="sign-in-form">
+                            <input type="submit" value="Cancel" class="btn" />
+                        </form>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </main>
+
+    <script src="~/Scripts/post.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+</body>
 

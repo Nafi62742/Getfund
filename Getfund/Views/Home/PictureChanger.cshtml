@@ -4,40 +4,52 @@
     ViewBag.Title = "PictureChanger";
 }
 
-<h2>PictureChanger</h2>
 
-<div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
-    @using (Html.BeginForm("UploadProfilePic", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        @Html.AntiForgeryToken()
+<div class="container">
+    <h2 style="margin-left:5rem">PictureChanger</h2>
+    
+    <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+        @using (Html.BeginForm("UploadProfilePic", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.file, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.file, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                    @Html.ValidationMessageFor(model => model.file, "", new { @class = "text-danger" })
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.file, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.file, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                        @Html.ValidationMessageFor(model => model.file, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Upload" class="btn btn-primary" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10 text-success">
+                        @ViewBag.ProfilePicDone
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Upload" class="btn btn-primary" />
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10 text-success">
-                    @ViewBag.ProfilePicDone
-                </div>
-            </div>
+        }
+        <div class="p-4">
+
+            @if (ViewBag.FileStatus != null)
+            {
+                <img src="@ViewBag.FileStatus" class="img-circle col-md-4" alt=""> }
+            else
+            {
+                <img src="~/images/propic.jpg" class="img-circle col-md-4" alt="">}
         </div>
-    }
-    <form action="/Home/PictureUpdated" autocomplete="on" class="sign-in-form" method="post">
-        <div>
-            <input type="hidden" name="ProfilePicture" id="ProfilePicture" class="form-control" value="@ViewBag.FileStatus">
-            <input type="hidden" name="ID" id="ID" value="@Session["IdUsSS"]" />
-            <input type="submit" value="Change Picture" class="btn" />
-        </div>
-    </form>
-</div>
+        <form action="/Home/PictureUpdated" autocomplete="on" class="sign-in-form" method="post">
+            <div>
+                <input type="hidden" name="ProfilePicture" id="ProfilePicture" class="form-control" value="@ViewBag.FileStatus">
+                <input type="hidden" name="ID" id="ID" value="@Session["IdUsSS"]" />
+                <input type="submit" value="Change Picture" class="btn" />
+            </div>
+        </form>
+    </div>
+    </div>

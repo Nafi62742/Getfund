@@ -72,3 +72,24 @@ VALUES (1,1, '25 March 2022', 'Something', '2455AFGBG5265DG',2000);
 
 
 DELETE FROM GUser WHERE ID=4;
+
+UPDATE DevS
+SET ProfilePicture = '/images/suzana.jpg'
+WHERE DevId = 1;
+
+Select * From Project
+UPDATE DevS
+SET Email = 'swapneelbiswas99@gmail.com'
+WHERE DevId = 3;
+
+UPDATE Project
+SET VideoLink = '/images/tree.jpg'
+WHERE PId = 1;
+DELETE FROM Project WHERE PId=3;
+
+UPDATE Project
+SET Title = 'Jakat Fund'
+WHERE PId = 4;
+
+
+DELETE FROM Project WHERE PId=3;

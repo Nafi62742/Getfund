@@ -36,8 +36,9 @@
                     <h4 class="text">@Model.Name</h4>
                     <form action="/Home/DonationHistory" autocomplete="on" class="sign-in-form" method="post">
                         <div>
-                            <input type="hidden" name="IdForDonation" id="IdForDonation" value="@Model.ID" />
-                            <input type="submit" value="Donation History" class="btn" />
+                            <input type="hidden" name="IdForDonation" id="IdForDonation" value="@Model.ID"/>
+                            
+                            <input type="submit" value="Donation History" class="btn" style="margin-bottom:2rem"/>
                         </div>
                     </form>
                     <form action="/Home/PictureChanger" autocomplete="on" class="sign-in-form" method="post">

@@ -155,6 +155,34 @@ namespace Getfund.Controllers
             return View("Post");
             
         }
+
+
+
+
+        [HttpPost]
+        public ActionResult UploadDevPic(HttpPostedFileBase file, Profile profile)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (file != null)
+                    {
+                        string path = Path.Combine(Server.MapPath("~/UploadFiles"), Path.GetFileName(file.FileName));
+                        ViewBag.FilePath = "Pic loaded click post to save.";
+                        ViewBag.FileStatus = "/UploadFiles/" + Path.GetFileName(file.FileName);
+                        file.SaveAs(path);
+                    }
+                }
+                catch (Exception)
+                {
+                    ViewBag.FileStatus = "Error while file uploading.";
+                }
+            }
+
+            return View("DevAdd");
+
+        }
         [HttpPost]
         public ActionResult UploadProfilePic(HttpPostedFileBase file)
         {
@@ -188,12 +216,11 @@ namespace Getfund.Controllers
         public ActionResult PostProject(Project UpProj)
         {
             List<Project> Users = db.Projects.Where(temp => temp.Title.Equals(UpProj.Title)).ToList();
-
+            List<GUser> Check = db.GUsers.Where(temp => temp.ID==idUser).ToList();
             if (Users.Count < 1)
             {
                 db.Projects.Add(UpProj);
                 db.SaveChanges();
-                
                 return RedirectToAction("Search");
             }
             else
@@ -236,8 +263,24 @@ namespace Getfund.Controllers
         }
         public ActionResult About()
         {
-            ViewBag.Message = "";
-            return View();
+            if (Session["UserEmail"] != null)
+            {
+                string emailUser = Session["UserEmail"].ToString();
+
+                //List<Dev> devs1 = db.DevS.SqlQuery("").ToList();
+                List<Dev> Users = db.DevS.Where(temp => temp.Email.Equals(emailUser)).ToList();
+
+                if (Users.Count < 1)
+                {
+                }
+                else
+                {
+                    TempData["AdminHere"] = "I am the admin now";
+                }
+            }
+            
+            List<Dev> devs = db.DevS.ToList();
+            return View(devs);
         }
         [HttpGet]
         public ActionResult DevAdd()
@@ -249,9 +292,27 @@ namespace Getfund.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult DevAdd(Project UpProj)
+        public ActionResult DevAdding(Dev dev)
         {
-            return View();
+
+            List<Dev> Users = db.DevS.Where(temp => temp.Email.Equals(dev.Email)).ToList();
+
+            if (Users.Count < 1)
+            {
+                db.DevS.Add(dev);
+                db.SaveChanges();
+
+                return RedirectToAction("About");
+            }
+            else
+            {
+                TempData["Same"] = " This person is already in the list!";
+                return RedirectToAction("DevAdd");
+
+            }
+
+
+            
         }
         public ActionResult Donate()
         {
@@ -285,10 +346,14 @@ namespace Getfund.Controllers
                 donation.ID = idUser;
                 db.Donations.Add(donation);
                 db.SaveChanges();
-                comment.CName = getCname;
-                comment.Comment1 = CommentArea;
-                db.Comments.Add(comment);
-                db.SaveChanges();
+                if (CommentArea != null)
+                {
+                    comment.CName = getCname;
+                    comment.Comment1 = CommentArea;
+                    db.Comments.Add(comment);
+                    db.SaveChanges();
+                }
+                
             
             }
             
@@ -302,9 +367,23 @@ namespace Getfund.Controllers
         }
         public ActionResult DonationHistory(int IdForDonation)
         {
-            List<Donation> donations = db.Donations.Where(temp => temp.ID==IdForDonation).ToList();
-           
-            return View(donations);
+            if (Session["IdUsSS"] == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                List<Donation> donations = db.Donations.Where(temp => temp.ID == IdForDonation).ToList();
+
+                if (donations.Count > 0)
+                {
+                    return View(donations);
+                }
+                else
+                {
+                    return View();
+                }
+            }
         }
         public ActionResult Search(string email, string LoginPass)
         {
@@ -619,7 +698,7 @@ namespace Getfund.Controllers
                 
                 TempData["LikesP"] = Detail.LikesP;
 
-                List<Comment> comments = db.Comments.ToList();
+                List<Comment> comments = db.Comments.Where(x=>x.PId== Detail.PId).ToList();
                 return View(comments);
             }
             else

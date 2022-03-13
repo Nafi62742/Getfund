@@ -181,7 +181,11 @@ section .details span {
         font-size: 16px;
     }
 
-
+@media (max-width: 1249px) {
+    nav ul li a {
+        font-size: 10px;
+    }
+}
 @media screen and (max-width: 870px) {
 
 .box{
